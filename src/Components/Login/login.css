@@ -1,0 +1,8 @@
+:local .form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+:local .button {
+  width: 100%;
+}
