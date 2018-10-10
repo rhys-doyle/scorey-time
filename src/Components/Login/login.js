@@ -19,7 +19,7 @@ class Login extends React.Component {
         console.log("Received values of form", values);
       }
     });
-    fetch("http://localhost:3000/login", {
+    fetch(CREATE_REACT_API_URL, {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" }
