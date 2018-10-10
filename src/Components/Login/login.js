@@ -19,7 +19,7 @@ class Login extends React.Component {
         console.log("Received values of form", values);
       }
     });
-    fetch(process.env.CREATE_REACT_ENDPOINT_URL, {
+    fetch(process.env.REACT_APP_ENDPOINT_URL, {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" }
