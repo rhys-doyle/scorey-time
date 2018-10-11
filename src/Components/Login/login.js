@@ -21,7 +21,7 @@ class Login extends React.Component {
     });
     fetch(process.env.REACT_APP_ENDPOINT_URL, {
       method: "POST",
-      mode: "cors",
+      mode: "no-cors",
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" }
     })
