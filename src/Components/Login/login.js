@@ -23,7 +23,7 @@ class Login extends React.Component {
       method: "POST",
       mode: "no-cors",
       body: JSON.stringify(this.state),
-      headers: { "Content-Type": "text/plain" }
+      headers: { "Content-Type": "application/json" }
     })
       .then(res => res.json())
       .catch(error => console.log("Error: ", error))
