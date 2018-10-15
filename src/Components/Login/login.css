@@ -6,3 +6,8 @@
 :local .button {
   width: 100%;
 }
+
+:local .div {
+  justify-content: center;
+  align-items: center;
+}
