@@ -45,44 +45,46 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form onSubmit={this.handleSubmit} className={styles.form}>
-        <FormItem>
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input username." }]
-          })(
-            <Input
-              className={styles.input}
-              prefix={
-                <Icon type="user" style={{ color: "rgba(0,0,0,0.25)" }} />
-              }
-              placeholder="Username"
-              onChange={event =>
-                this.setState({ username: event.target.value })
-              }
-            />
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input password." }]
-          })(
-            <Input
-              className={styles.input}
-              prefix={
-                <Icon type="lock" style={{ color: "rgba(0,0,0,0.25)" }} />
-              }
-              type="password"
-              placeholder="Password"
-              onChange={event =>
-                this.setState({ password: event.target.value })
-              }
-            />
-          )}
-        </FormItem>
-        <Button type="primary" className={styles.button} htmlType="submit">
-          login
-        </Button>
-      </Form>
+      <div className={styles.div}>
+        <Form onSubmit={this.handleSubmit} className={styles.form}>
+          <FormItem>
+            {getFieldDecorator("username", {
+              rules: [{ required: true, message: "Please input username." }]
+            })(
+              <Input
+                className={styles.input}
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,0.25)" }} />
+                }
+                placeholder="Username"
+                onChange={event =>
+                  this.setState({ username: event.target.value })
+                }
+              />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator("password", {
+              rules: [{ required: true, message: "Please input password." }]
+            })(
+              <Input
+                className={styles.input}
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,0.25)" }} />
+                }
+                type="password"
+                placeholder="Password"
+                onChange={event =>
+                  this.setState({ password: event.target.value })
+                }
+              />
+            )}
+          </FormItem>
+          <Button type="primary" className={styles.button} htmlType="submit">
+            login
+          </Button>
+        </Form>
+      </div>
     );
   }
 }
