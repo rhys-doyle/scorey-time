@@ -1,13 +1,10 @@
-:local .form {
-  max-width: 300px;
-  margin: 0 auto;
-}
-
 :local .button {
   width: 100%;
 }
 
 :local .div {
+  max-width: 300px;
+  margin: auto auto;
   justify-content: center;
   align-items: center;
 }
