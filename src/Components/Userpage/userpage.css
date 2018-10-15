@@ -1,2 +1,28 @@
-:local .div {
+:local .headerBox {
+  font-family: "Roboto Slab", serif;
+  display: flex;
+}
+
+:local .header {
+  font-size: 45px;
+  margin: 0;
+}
+
+:local .logoBox {
+  background-color: rgb(27, 154, 255);
+  font-weight: 700;
+  color: white;
+  max-width: 50px;
+  width: 100%;
+  max-height: 50px;
+  text-align: center;
+  padding-top: 7px;
+  font-size: 25px;
+  letter-spacing: 2px;
+  border-radius: 10px;
+}
+
+:local .userPage {
+  margin: 15px 15px 0 15px;
+  width: 100%;
 }
