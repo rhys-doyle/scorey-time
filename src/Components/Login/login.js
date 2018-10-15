@@ -20,10 +20,9 @@ class Login extends React.Component {
       }
     });
     fetch(process.env.REACT_APP_ENDPOINT_URL, {
+      headers: { "Content-Type": "application/json" },
       method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(this.state),
-      headers: { "Content-Type": "application/json" }
+      body: JSON.stringify(this.state)
     })
       .then(res => res.json())
       .catch(error => console.log("Error: ", error))
