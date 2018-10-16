@@ -39,17 +39,20 @@ export default class Userpage extends React.Component {
             <img src={profile} className={styles.img} alt="profile_photo" />
           </div>
           <div className={styles.contentBox}>
-            <div className={styles.userInfo}>
-              <h2 className={styles.user}>Rhys Doyle</h2>
-              <h4 className={styles.userName}>@rhys__</h4>
-            </div>
-            <div className={styles._locationBox}>
-              <Icon
-                type="environment"
-                className={styles._locationIcon}
-                style={{ color: "rgba(0,0,0,0.25)" }}
-              />
-              <span className={styles._location}>Melbourne, VIC</span>
+            <div className={styles.content1}>
+              <div className={styles.userInfo}>
+                <h2 className={styles.user}>Rhys Doyle</h2>
+                <h4 className={styles.userName}>@rhys__</h4>
+              </div>
+              <div className={styles._locationBox}>
+                <Icon
+                  type="environment"
+                  theme="filled"
+                  className={styles._locationIcon}
+                  style={{ color: "rgba(0,0,0,0.25)" }}
+                />
+                <span className={styles._location}>Melbourne, VIC</span>
+              </div>
             </div>
           </div>
         </div>

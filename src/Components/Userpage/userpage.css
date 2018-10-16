@@ -113,3 +113,36 @@
   max-width: 65%;
   width: 100%;
 }
+
+:local .content1 {
+  display: flex;
+  font-family: "Roboto Slab", serif;
+}
+
+:local .user {
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 45px;
+}
+
+:local .userName {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 30px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+:local ._location {
+  padding: 0 0 0 9%;
+  font-size: 17px;
+}
+
+:local ._locationBox {
+  padding: 2% 0 0 4%;
+  max-width: 220px;
+  width: 100%;
+}
+
+:local ._locationIcon {
+  font-size: 20px;
+}
