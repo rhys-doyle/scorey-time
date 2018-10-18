@@ -1,4 +1,3 @@
 :local .App {
-  display: flex;
   flex-grow: 1;
 }
