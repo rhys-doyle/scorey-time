@@ -94,8 +94,12 @@
   height: 50px !important;
 }
 
-:local .topBox {
+:local .container {
   padding: 45px;
+  font-family: "Roboto Slab", serif;
+}
+
+:local .content1 {
   display: flex;
   justify-content: space-between;
 }
@@ -109,14 +113,11 @@
   width: 100%;
 }
 
-:local .contentBox {
+:local .userContent {
   max-width: 65%;
   width: 100%;
-}
-
-:local .content1 {
   display: flex;
-  font-family: "Roboto Slab", serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 :local .user {
@@ -145,4 +146,31 @@
 
 :local ._locationIcon {
   font-size: 20px;
+}
+
+:local .content2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+:local .friendsBox {
+  max-width: 25%;
+  width: 100%;
+}
+
+:local .friendsTitle {
+  font-size: 45px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+:local .friends {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 30px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+:local .aboutBox {
+  max-width: 65%;
+  width: 100%;
 }

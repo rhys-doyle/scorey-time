@@ -34,12 +34,12 @@ export default class Userpage extends React.Component {
             </Button>
           </div>
         </div>
-        <div className={styles.topBox}>
-          <div className={styles.imgBox}>
-            <img src={profile} className={styles.img} alt="profile_photo" />
-          </div>
-          <div className={styles.contentBox}>
-            <div className={styles.content1}>
+        <div className={styles.container}>
+          <div className={styles.content1}>
+            <div className={styles.imgBox}>
+              <img src={profile} className={styles.img} alt="profile_photo" />
+            </div>
+            <div className={styles.userContent}>
               <div className={styles.userInfo}>
                 <h2 className={styles.user}>Rhys Doyle</h2>
                 <h4 className={styles.userName}>@rhys__</h4>
@@ -53,6 +53,16 @@ export default class Userpage extends React.Component {
                 />
                 <span className={styles._location}>Melbourne, VIC</span>
               </div>
+            </div>
+          </div>
+          <div className={styles.content2}>
+            <div className={styles.friendsBox}>
+              <h2 className={styles.friendsTitle}>Friends</h2>
+              <h4 className={styles.friends}>@ojame</h4>
+              <h4 className={styles.friends}>@ashington</h4>
+            </div>
+            <div className={styles.aboutBox}>
+              <h4 className={styles.about}>About</h4>
             </div>
           </div>
         </div>
