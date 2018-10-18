@@ -13,7 +13,7 @@
 }
 
 :local .logoBox {
-  background-color: #1b9aff;
+  background-color: #1b9aef;
   font-weight: 400;
   color: white;
   max-width: 60px;
@@ -133,19 +133,18 @@
   font-style: italic;
 }
 
-:local ._location {
-  padding: 0 0 0 9%;
-  font-size: 17px;
+:local .userInfo {
+  width: 100%;
 }
 
-:local ._locationBox {
-  padding: 2% 0 0 4%;
-  max-width: 220px;
-  width: 100%;
+:local ._location {
+  padding: 0 0 0 20px;
+  font-size: 17px;
 }
 
 :local ._locationIcon {
   font-size: 20px;
+  padding: 0 0 0 45px;
 }
 
 :local .content2 {
@@ -159,8 +158,11 @@
 }
 
 :local .friendsTitle {
-  font-size: 45px;
-  color: rgba(0, 0, 0, 0.7);
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  padding: 80px 0px 0 0;
+  justify-content: space-between;
 }
 
 :local .friends {
@@ -173,4 +175,39 @@
 :local .aboutBox {
   max-width: 65%;
   width: 100%;
+}
+
+:local .divider {
+  width: 80%;
+  background: linear-gradient(
+    to bottom,
+    #00000000 52.5%,
+    #00000035 52.6%,
+    #00000035 57.5%,
+    #00000000 57.6%,
+    #00000000 100%
+  );
+}
+
+:local .about {
+  padding: 10px 10px 0 0;
+  border: 2px solid #00000000;
+  color: #00000035;
+}
+
+:local .about:hover {
+  border-top: 3px solid #1b9aef;
+  color: #00000055;
+}
+
+:local .aboutIcon {
+  padding: 0 10px 0 0;
+}
+
+:local .aboutIcon:hover {
+  color: #00000055;
+}
+
+:local .aboutHeader {
+  padding: 10px 0 0 0;
 }
