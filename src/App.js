@@ -4,14 +4,17 @@ import Userpage from "./Components/Userpage/userpage";
 import Authentication from "./Components/Authentication/authentication";
 import Newgame from "./Components/Newgame/newgame";
 import styles from "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { Redirect } from "react-router";
+import Header from "./Components/Header/header";
+import history from "./history";
 
 export default class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className={styles.App}>
+          <Header history={history} />
           <Authentication>
             <Route path="/" exact render={() => <Redirect to="/userpage" />} />
             <Route path="/userpage" component={Userpage} />
@@ -19,7 +22,7 @@ export default class App extends Component {
           </Authentication>
           <Route exact path="/login" component={Login} />
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
