@@ -28,7 +28,13 @@ export default class Userpage extends React.Component {
             placeholder="Search"
           />
           <div className={styles.newGameBox}>
-            <Button type="primary" className={styles.button} size="large" block>
+            <Button
+              type="primary"
+              className={styles.button}
+              size="large"
+              onClick={() => this.props.history.push("/newgame")}
+              block
+            >
               New Game!
               <Icon type="caret-right" />
             </Button>
@@ -72,7 +78,7 @@ export default class Userpage extends React.Component {
                     className={styles.aboutIcon}
                     style={{ color: "#00000035" }}
                   />
-                  About
+                  ABOUT
                 </span>
               </h4>
             </div>
