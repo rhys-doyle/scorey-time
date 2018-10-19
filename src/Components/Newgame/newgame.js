@@ -15,10 +15,12 @@ export default class Newgame extends React.Component {
             className={styles.gameButton}
           />
           <Input
+            list="games"
             prefix={<Icon type="search" style={{ color: "#00000055" }} />}
             placeholder="Find game"
             className={styles.gameFind}
           />
+          <
         </div>
         <div className={styles.setupBox}>
           <Button type="primary" children="PLAYERS" />
