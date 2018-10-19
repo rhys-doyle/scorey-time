@@ -1,0 +1,9 @@
+:local .setup {
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+}
+
+:local .setupHeader {
+  font-size: 45px;
+  color: #00000070;
+}
