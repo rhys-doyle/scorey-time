@@ -7,3 +7,14 @@
   font-size: 45px;
   color: #00000070;
 }
+
+:local .gameFind {
+  width: 20%;
+}
+
+:local .gameBox {
+  padding: 0 0 40px 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+}

@@ -8,11 +8,24 @@ export default class Newgame extends React.Component {
     return (
       <div className={styles.setup}>
         <h1 className={styles.setupHeader}>Game Setup</h1>
-        <div className={styles.gameSetup}>
+        <div className={styles.gameBox}>
+          <Button
+            type="primary"
+            children="GAME"
+            className={styles.gameButton}
+          />
+          <Input
+            prefix={<Icon type="search" style={{ color: "#00000055" }} />}
+            placeholder="Find game"
+            className={styles.gameFind}
+          />
+        </div>
+        <div className={styles.setupBox}>
+          <Button type="primary" children="PLAYERS" />
           <ButtonGroup>
-            <Button type="primary" children="4" />
-            <Button type="primary" children="5" disabled />
-            <Button type="primary" children="6" />
+            <Button type="default" children="4" />
+            <Button type="default" children="5" disabled />
+            <Button type="default" children="6" />
           </ButtonGroup>
         </div>
       </div>
