@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Icon, Input } from "antd";
 import styles from "./newgame.css";
-import games from ".../Data/games.js";
+import games from "../Data/games";
+import friends from "../Data/friends";
 const ButtonGroup = Button.Group;
 
 export default class Newgame extends React.Component {
@@ -30,7 +31,7 @@ export default class Newgame extends React.Component {
           />
           <ButtonGroup className={styles.buttonBox}>
             <Button type="default" children="4" />
-            <Button type="default" children="5" disabled />
+            <Button type="default" children="5" />
             <Button type="default" children="6" />
           </ButtonGroup>
           <Input
@@ -45,6 +46,18 @@ export default class Newgame extends React.Component {
             type="primary"
             children="TEAMS"
           />
+          <ButtonGroup className={styles.teamsBox}>
+            <Button
+              className={styles.teamsButton}
+              type="default"
+              children="2"
+            />
+            <Button
+              className={styles.teamsButton}
+              type="default"
+              children="3"
+            />
+          </ButtonGroup>
         </div>
       </div>
     );
