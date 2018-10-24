@@ -8,8 +8,8 @@
   color: #00000070;
 }
 
-:local .gameFind {
-  width: 20%;
+:local .gameSelect {
+  width: 77%;
 }
 
 :local .gameBox {
@@ -17,4 +17,30 @@
   display: flex;
   justify-content: space-between;
   max-width: 500px;
+  margin: 0 auto;
+}
+
+:local .setupBox {
+  display: flex;
+  max-width: 500px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+:local .buttonBox {
+  display: flex;
+}
+
+:local .playerSelect {
+  max-width: 50%;
+}
+
+:local .playerButton {
+  max-width: 100px;
+  width: 100%;
+}
+
+:local .gameButton {
+  max-width: 100px;
+  width: 100%;
 }
