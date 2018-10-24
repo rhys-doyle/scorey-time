@@ -20,7 +20,7 @@
   margin: 0 auto;
 }
 
-:local .setupBox {
+:local .playerBox {
   display: flex;
   max-width: 500px;
   justify-content: space-between;
