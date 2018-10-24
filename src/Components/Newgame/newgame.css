@@ -25,6 +25,7 @@
   max-width: 500px;
   justify-content: space-between;
   margin: 0 auto;
+  padding: 0 0 40px 0;
 }
 
 :local .buttonBox {
@@ -43,4 +44,16 @@
 :local .gameButton {
   max-width: 100px;
   width: 100%;
+}
+
+:local .teamButton {
+  max-width: 100px;
+  width: 100%;
+}
+
+:local .teamBox {
+  max-width: 500px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
 }
