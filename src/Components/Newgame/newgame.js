@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Icon, Input } from "antd";
 import styles from "./newgame.css";
+import games from ".../Data/games.js";
 const ButtonGroup = Button.Group;
 
 export default class Newgame extends React.Component {
@@ -21,7 +22,7 @@ export default class Newgame extends React.Component {
             className={styles.gameSelect}
           />
         </div>
-        <div className={styles.setupBox}>
+        <div className={styles.playerBox}>
           <Button
             type="primary"
             children="PLAYERS"
@@ -36,6 +37,13 @@ export default class Newgame extends React.Component {
             prefix={<Icon type="user" style={{ color: "#00000055" }} />}
             placeholder="Select Players"
             className={styles.playerSelect}
+          />
+        </div>
+        <div className={styles.teamBox}>
+          <Button
+            className={styles.teamButton}
+            type="primary"
+            children="TEAMS"
           />
         </div>
       </div>
