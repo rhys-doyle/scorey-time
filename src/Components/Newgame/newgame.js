@@ -6,15 +6,22 @@ import friends from "../Data/friends";
 
 export default class Newgame extends React.Component {
   state = {
-    players: 4
+    players: "4",
+    teams: "0"
   };
 
-  handleOnChange = event => {
+  handleOnChangePlayers = event => {
     this.setState({ players: event.target.value });
   };
 
+  handleOnChangeTeams = event => {
+    this.setState({ teams: event.target.value });
+  };
+
   render() {
-    const { players } = this.state;
+    const players = this.state.players;
+    const teams = this.state.teams;
+
     return (
       <div className={styles.setup}>
         <h1 className={styles.setupHeader}>Game Setup</h1>
@@ -25,10 +32,11 @@ export default class Newgame extends React.Component {
             className={styles.gameButton}
           />
           <Select
-            dataSource={friends}
-            prefix={<Icon type="search" style={{ color: "#00000055" }} />}
             placeholder="Select Game"
             className={styles.gameSelect}
+            children={games.map(value => (
+              <Select.Option key={value.game}>{value.game}</Select.Option>
+            ))}
           />
         </div>
         <div className={styles.playerBox}>
@@ -39,17 +47,20 @@ export default class Newgame extends React.Component {
           />
           <Radio.Group
             value={players}
-            onChange={this.handleOnChange}
+            onChange={this.handleOnChangePlayers}
             className={styles.buttonBox}
           >
             <Radio.Button value="4" children="4" />
             <Radio.Button value="5" children="5" />
             <Radio.Button value="6" children="6" />
           </Radio.Group>
-          <Input
-            prefix={<Icon type="user" style={{ color: "#00000055" }} />}
+          <Select
+            mode="multiple"
             placeholder="Select Players"
             className={styles.playerSelect}
+            children={friends.map(value => (
+              <Select.Option key={value}>@{value}</Select.Option>
+            ))}
           />
         </div>
         <div className={styles.teamBox}>
@@ -58,18 +69,29 @@ export default class Newgame extends React.Component {
             type="primary"
             children="TEAMS"
           />
-          <Radio.Group className={styles.teamsBox}>
+          <Radio.Group
+            value={teams}
+            onChange={this.handleOnChangeTeams}
+            className={styles.teamsBox}
+          >
             <Radio.Button
+              value="2"
               className={styles.teamsButton}
-              type="default"
               children="2"
             />
             <Radio.Button
+              value="2"
               className={styles.teamsButton}
-              type="default"
               children="3"
             />
+            <Radio.Button
+              value="random"
+              className={styles.teamsButton}
+              children="RANDOM"
+            />
           </Radio.Group>
+          <Select
+            
         </div>
       </div>
     );
