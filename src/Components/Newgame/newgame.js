@@ -153,8 +153,16 @@ export default class Newgame extends React.Component {
               children="RANDOM"
             />
           </Radio.Group>
+
           <Select
-            
+            className={styles.teamSelect}
+            children={this.handleTeamSelect()}
+            placeholder="Select Teams"
+            // value={this.handleRandomTeam()}
+            style={{
+              visibility: this.state.teams !== "random" ? "visible" : "hidden"
+            }}
+          />
         </div>
       </div>
     );
