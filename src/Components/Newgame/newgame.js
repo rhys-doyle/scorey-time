@@ -60,6 +60,25 @@ export default class Newgame extends React.Component {
     this.setState({ game: event.target.value });
   };
 
+  handleTeamSelect = () => {
+    if (this.state.teams === "random") {
+      return [];
+    }
+    const players = this.state.game.players.find(
+      players => players.number === this.state.players
+    );
+
+    const teams = players.teams;
+    if (this.state.players === 6) {
+      return teams[this.state.teams - 2].map(team => (
+        <Select.Option key={team}>{team}</Select.Option>
+      ));
+    } else {
+      return teams.map(team => (
+        <Select.Option key={team}>{team}</Select.Option>
+      ));
+    }
+  };
 
     return (
       <div className={styles.setup}>
