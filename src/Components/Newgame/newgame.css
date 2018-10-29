@@ -58,3 +58,7 @@
   margin: 0 auto;
   justify-content: space-between;
 }
+
+:local .teamSelect {
+  width: 40%;
+}
