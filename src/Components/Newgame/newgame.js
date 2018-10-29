@@ -56,9 +56,10 @@ export default class Newgame extends React.Component {
     this.setState({ teams: event.target.value });
   };
 
-  render() {
-    const players = this.state.players;
-    const teams = this.state.teams;
+  handleGameChange = event => {
+    this.setState({ game: event.target.value });
+  };
+
 
     return (
       <div className={styles.setup}>
