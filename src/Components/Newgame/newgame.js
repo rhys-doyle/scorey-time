@@ -80,6 +80,7 @@ export default class Newgame extends React.Component {
     }
   };
 
+  render() {
     return (
       <div className={styles.setup}>
         <h1 className={styles.setupHeader}>Game Setup</h1>
@@ -91,10 +92,12 @@ export default class Newgame extends React.Component {
           />
           <Select
             placeholder="Select Game"
+            defaultValue={this.state.game.name}
             className={styles.gameSelect}
             children={games.map(value => (
-              <Select.Option key={value.game}>{value.game}</Select.Option>
+              <Select.Option key={value.name}>{value.name}</Select.Option>
             ))}
+            onChange={this.handleGameChange}
           />
         </div>
         <div className={styles.playerBox}>
