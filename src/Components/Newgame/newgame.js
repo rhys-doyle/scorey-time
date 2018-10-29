@@ -131,17 +131,19 @@ export default class Newgame extends React.Component {
             children="TEAMS"
           />
           <Radio.Group
-            value={teams}
+            disabled={this.state.teamsDisabled}
+            value={this.state.teams}
             onChange={this.handleOnChangeTeams}
             className={styles.teamsBox}
           >
             <Radio.Button
-              value="2"
+              value={2}
               className={styles.teamsButton}
               children="2"
             />
             <Radio.Button
-              value="2"
+              disabled={this.state.threeDisabled}
+              value={3}
               className={styles.teamsButton}
               children="3"
             />
