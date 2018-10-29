@@ -107,13 +107,13 @@ export default class Newgame extends React.Component {
             className={styles.playerButton}
           />
           <Radio.Group
-            value={players}
+            value={this.state.players}
             onChange={this.handleOnChangePlayers}
             className={styles.buttonBox}
           >
-            <Radio.Button value="4" children="4" />
-            <Radio.Button value="5" children="5" />
-            <Radio.Button value="6" children="6" />
+            <Radio.Button value={4} children="4" />
+            <Radio.Button value={5} children="5" />
+            <Radio.Button value={6} children="6" />
           </Radio.Group>
           <Select
             mode="multiple"
