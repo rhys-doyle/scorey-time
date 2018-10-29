@@ -6,8 +6,12 @@ import friends from "../Data/friends";
 
 export default class Newgame extends React.Component {
   state = {
-    players: "4",
-    teams: "0"
+    players: 4,
+    teams: 2,
+    game: games[0],
+    teamsDisabled: false,
+    threeDisabled: true,
+    teamConfig: ""
   };
 
   handleOnChangePlayers = event => {
