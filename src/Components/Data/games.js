@@ -1,20 +1,20 @@
 const games = [
   {
-    game: "500",
+    name: "500",
     players: [
       {
-        number: "4",
-        configuartion: "2 teams of 2",
+        number: 4,
+        configuartion: 2,
         teams: ["1&2 vs 3&4", "1&3 vs 2&4", "1&4 vs 2&3"]
       },
       {
-        number: "5",
-        configuration: ["5 teams of 1"],
-        teams: "Individual Teams"
+        number: 5,
+        configuration: [5],
+        teams: ["Individual Teams"]
       },
       {
-        number: "6",
-        configuration: ["2 teams of 3", "3 teams of 2"],
+        number: 6,
+        configuration: [2, 3],
         teams: [
           [
             "1&2&3 vs 4&5&6",
@@ -50,21 +50,21 @@ const games = [
     ]
   },
   {
-    game: "Euchre",
+    name: "Euchre",
     players: [
       {
-        number: "4",
-        configuration: "2 teams of 2",
+        number: 4,
+        configuration: 2,
         teams: ["1&2 vs 3&4", "1&3 vs 2&4", "1&4 vs 2&3"]
       },
       {
-        number: "5",
-        configuration: "5 teams of 1",
+        number: 5,
+        configuration: 5,
         teams: "Individual Teams"
       },
       {
-        number: "6",
-        configuration: ["2 teams of 3", "3 teams of 2"],
+        number: 6,
+        configuration: [2, 3],
         teams: [
           [
             "1&2&3 vs 4&5&6",
@@ -100,10 +100,10 @@ const games = [
     ]
   },
   {
-    game: "Hearts",
+    name: "Hearts",
     players: {
-      number: "4",
-      configuration: "4 teams of 1",
+      number: 4,
+      configuration: 4,
       teams: "Individual Teams"
     }
   }
