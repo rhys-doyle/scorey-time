@@ -15,7 +15,24 @@ export default class Newgame extends React.Component {
   };
 
   handleOnChangePlayers = event => {
-    this.setState({ players: event.target.value });
+    let { threeDisabled } = this.state;
+    let { teamsDisabled } = this.state;
+    if (event.target.value === 4) {
+      teamsDisabled = false;
+      threeDisabled = true;
+    } else if (event.target.value === 5) {
+      teamsDisabled = true;
+    } else if (event.target.value === 6) {
+      teamsDisabled = false;
+      threeDisabled = false;
+    }
+    this.setState({
+      players: event.target.value,
+      threeDisabled,
+      teamsDisabled
+    });
+  };
+
   };
 
   handleOnChangeTeams = event => {
