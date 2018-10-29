@@ -33,6 +33,23 @@ export default class Newgame extends React.Component {
     });
   };
 
+  handleRandomTeam = () => {
+    if (this.state.teams === "random") {
+      if (this.state.players === 4) {
+        let config = Math.random() * Math.floor(2);
+        this.setState({ teamConfig: this.state.game.players[0].teams[config] });
+      } else if (this.state.players === 6) {
+        let config = Math.random() * Math.floor(24);
+        let index = 1;
+
+        if (config < 10) {
+          index = 0;
+        }
+        this.setState({
+          teamConfig: this.state.game.players[2].teams[index][config]
+        });
+      }
+    }
   };
 
   handleOnChangeTeams = event => {
