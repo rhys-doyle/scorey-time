@@ -11,10 +11,16 @@ export default class Newgame extends React.Component {
     game: games[0],
     teamsDisabled: false,
     threeDisabled: true,
-    teamConfig: ""
+    teamConfig: "",
+    teamSelect: ""
+  };
+
+  teamSelectReset = () => {
+    this.setState({ teamSelect: "" });
   };
 
   handleOnChangePlayers = event => {
+    this.teamSelectReset();
     let { threeDisabled } = this.state;
     let { teamsDisabled } = this.state;
     if (event.target.value === 4) {
@@ -53,6 +59,14 @@ export default class Newgame extends React.Component {
   };
 
   handleOnChangeTeams = event => {
+    if (this.state.players === 6) {
+      if (
+        (this.state.teams === 2 && event.target.value === 3) ||
+        (this.state.teams === 3 && event.target.value === 2)
+      ) {
+        this.teamSelectReset();
+      }
+    }
     this.setState({ teams: event.target.value });
   };
 
@@ -71,11 +85,15 @@ export default class Newgame extends React.Component {
     const teams = players.teams;
     if (this.state.players === 6) {
       return teams[this.state.teams - 2].map(team => (
-        <Select.Option key={team}>{team}</Select.Option>
+        <Select.Option key={team} value={team}>
+          {team}
+        </Select.Option>
       ));
     } else {
       return teams.map(team => (
-        <Select.Option key={team}>{team}</Select.Option>
+        <Select.Option key={team} value={team}>
+          {team}
+        </Select.Option>
       ));
     }
   };
@@ -157,8 +175,9 @@ export default class Newgame extends React.Component {
           <Select
             className={styles.teamSelect}
             children={this.handleTeamSelect()}
+            value={this.state.teamSelect}
+            onChange={value => this.setState({ teamSelect: value })}
             placeholder="Select Teams"
-            // value={this.handleRandomTeam()}
             style={{
               visibility: this.state.teams !== "random" ? "visible" : "hidden"
             }}
