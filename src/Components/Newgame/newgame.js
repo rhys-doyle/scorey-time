@@ -4,6 +4,8 @@ import styles from "./newgame.css";
 import games from "../Data/games";
 import friends from "../Data/friends";
 
+const abc123 = "0123456789abcdefghijklmnopqrstuvwxyz";
+
 export default class Newgame extends React.Component {
   state = {
     players: 4,
