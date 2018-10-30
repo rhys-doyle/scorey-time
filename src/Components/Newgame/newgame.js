@@ -24,6 +24,18 @@ export default class Newgame extends React.Component {
       id = id.concat(abc123.charAt(Math.round(Math.random * 35)));
     }
   };
+
+  startGameHandler = () => {
+    let id = "";
+    for (i = 0; i < 10; i++) {
+      id = id.concat(abc123.charAt(Math.round(Math.random * 35)));
+    }
+    if (this.state.gameId.find(game => game === id)) {
+    }
+
+    const cloneGameId = this.state.gameId.slice();
+    cloneGameId.push(id);
+    this.setState({ gameId: cloneGameId });
   };
 
   teamSelectReset = () => {
