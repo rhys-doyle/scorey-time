@@ -183,6 +183,16 @@ export default class Newgame extends React.Component {
             }}
           />
         </div>
+        <div className={styles.startBox}>
+          <Button
+            className={styles.startButton}
+            size="large"
+            block
+            type="primary"
+          >
+            Start Game!
+          </Button>
+        </div>
       </div>
     );
   }

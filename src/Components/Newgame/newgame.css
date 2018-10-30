@@ -57,8 +57,14 @@
   display: flex;
   margin: 0 auto;
   justify-content: space-between;
+  padding: 0 0 40px 0;
 }
 
 :local .teamSelect {
   width: 40%;
+}
+
+:local .startBox {
+  max-width: 500px;
+  margin: 0 auto;
 }
