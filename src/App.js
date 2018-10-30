@@ -18,8 +18,8 @@ export default class App extends Component {
           <Authentication>
             <Route path="/" exact render={() => <Redirect to="/userpage" />} />
             <Route path="/userpage" component={Userpage} />
-            <Route path="/newgame" component={Newgame} />
-            <Route path="/playgame" component={Playgame} />
+            <Route path="/newgame" component={Newgame} history={history} />
+            <Route path="/game/:id" component={Game} />
           </Authentication>
           <Route exact path="/login" component={Login} />
         </div>
