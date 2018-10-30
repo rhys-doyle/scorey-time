@@ -14,7 +14,16 @@ export default class Newgame extends React.Component {
     teamsDisabled: false,
     threeDisabled: true,
     teamConfig: "",
-    teamSelect: ""
+    teamSelect: "",
+    gameId: []
+  };
+
+  idGenerator = () => {
+    let id = "";
+    for (i = 0; i < 10; i++) {
+      id = id.concat(abc123.charAt(Math.round(Math.random * 35)));
+    }
+  };
   };
 
   teamSelectReset = () => {
