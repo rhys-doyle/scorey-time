@@ -8,6 +8,7 @@ import { Router, Route } from "react-router-dom";
 import { Redirect } from "react-router";
 import Header from "./Components/Header/header";
 import history from "./history";
+import Game from "./Components/Game/game";
 
 export default class App extends Component {
   render() {
