@@ -148,26 +148,29 @@ const generateTeams = () => {
   }
 };
 
-const fillConfigs = () => {
-  if (configs.length) {
-    let i;
-    for (i = 0; i < configs.length; i += 2) {}
+const newConfig = () => {
+  const exists = lastPushed.find(value => value === team1);
+  if (exists) {
+    generateTeams();
   } else {
-    if (lastPushed.find(value => value === team1)) {
-    } else {
-      lastPushed.push(team1);
-    }
-  }
-  if (!lastPushed.find(combo => combo === team1.sort())) {
-    configs.push(team1.sort());
-    configs.push(team2.sort());
+    lastPushed.push(team1, team2);
+    configs.push(team1, team2);
     totalConfigs.push(configs);
+    configs.splice(0, 2);
+    team1.splice(0, 3);
+    team2.splice(0, 3);
   }
 };
 
-while (totalConfigs.length < totalCombos) {
-  fillCombo();
-}
+const fillConfigs = () => {
+  generateTeams();
+  while (totalConfigs.length < totalCombos) {
+    newConfig();
+  }
+};
+
+fillConfigs();
+console.log(totalConfigs);
 
 // const totalPlayers = 6;
 // const teamCounts = [2];
