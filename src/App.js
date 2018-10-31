@@ -11,6 +11,10 @@ import history from "./history";
 import Game from "./Components/Game/game";
 
 export default class App extends Component {
+  state = [];
+
+  childStateHandler = () => {};
+
   render() {
     return (
       <Router history={history}>
@@ -19,7 +23,12 @@ export default class App extends Component {
           <Authentication>
             <Route path="/" exact render={() => <Redirect to="/userpage" />} />
             <Route path="/userpage" component={Userpage} />
-            <Route path="/newgame" component={Newgame} history={history} />
+            <Route
+              path="/newgame"
+              component={Newgame}
+              history={history}
+              action={this.childStateHandler}
+            />
             <Route path="/game/:id" component={Game} />
           </Authentication>
           <Route exact path="/login" component={Login} />
