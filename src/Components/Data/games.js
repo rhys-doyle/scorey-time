@@ -117,14 +117,25 @@ const players = [1, 2, 3, 4, 5, 6];
 let team1 = [];
 let team2;
 let configs = [];
+let lastPushed = [];
 let totalConfigs = [];
-const total
-const fillCombo = () => {
-  let playersClone = players.slice();
-  const randomIndex = arraySize => {
-    return Math.round(Math.random() * (arraySize - 1));
-  };
+const factorial = number => {
+  let y = number;
+  for (let i = 1; i < number; i++) {
+    y = y * (number - i);
+    number = number - 1;
+  }
+  return y;
+};
+let playersClone = players.slice();
+const randomIndex = arraySize => {
+  return Math.round(Math.random() * (arraySize - 1));
+};
+const totalCombos =
+  factorial(totalPlayers) /
+  (factorial(playersPerTeam) * factorial(totalPlayers - playersPerTeam));
 
+const generateTeams = () => {
   while (playersClone.length > playersPerTeam) {
     let player = randomIndex(playersClone.length);
     team1.push(playersClone[player]);
@@ -132,22 +143,30 @@ const fillCombo = () => {
 
     if (playersClone.length === playersPerTeam) {
       team2 = playersClone.slice().sort();
-      if (!configs.find(combo => combo === team1.sort())) {
-        configs.push(team1.sort());
-        configs.push(team2.sort());
-        totalConfigs.push(configs);
-      }
+      team1 = team1.sort();
     }
   }
 };
 
-factorial = number => {
-  let y = number;
-  for (let i = 1; i < number; i++) {
-    y = y * (number - i);
-    number = number - 1;
+const fillConfigs = () => {
+  if (configs.length) {
+    let i;
+    for (i = 0; i < configs.length; i += 2) {}
+  } else {
+    if (lastPushed.find(value => value === team1)) {
+    } else {
+      lastPushed.push(team1);
+    }
   }
-  return y;
+  if (!lastPushed.find(combo => combo === team1.sort())) {
+    configs.push(team1.sort());
+    configs.push(team2.sort());
+    totalConfigs.push(configs);
+  }
+};
+
+while (totalConfigs.length < totalCombos) {
+  fillCombo();
 }
 
 // const totalPlayers = 6;
