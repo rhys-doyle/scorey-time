@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio, Select, Button, Icon, Input } from "antd";
+import { Radio, Select, Button } from "antd";
 import styles from "./newgame.css";
 import games from "../Data/games";
 import friends from "../Data/friends";
