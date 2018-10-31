@@ -15,27 +15,37 @@ export default class Newgame extends React.Component {
     threeDisabled: true,
     teamConfig: "",
     teamSelect: "",
-    gameId: []
+    gameInfo: []
   };
 
   idGenerator = () => {
-    let id = "";
-    for (i = 0; i < 10; i++) {
-      id = id.concat(abc123.charAt(Math.round(Math.random * 35)));
-    }
+    const generateId = () => {
+      let id = "";
+      let i = 0;
+      for (i = 0; i < 10; i++) {
+        id = id.concat(abc123.charAt(Math.round(Math.random() * 35)));
+      }
+      return id;
+    };
+
+    const generateUniqueId = id => {
+      const exists = this.state.gameInfo.find(game => game._id === id);
+
+      if (exists) {
+        generateUniqueId(generateId());
+      } else {
+        return id;
+      }
+    };
+
+    return generateUniqueId(generateId());
   };
 
-  startGameHandler = () => {
-    let id = "";
-    for (i = 0; i < 10; i++) {
-      id = id.concat(abc123.charAt(Math.round(Math.random * 35)));
-    }
-    if (this.state.gameId.find(game => game === id)) {
-    }
-
-    const cloneGameId = this.state.gameId.slice();
-    cloneGameId.push(id);
-    this.setState({ gameId: cloneGameId });
+  startGameHandler = id => {
+    const cloneGameInfo = this.state.gameInfo.slice();
+    cloneGameInfo.push({ _id: id });
+    this.setState({ gameInfo: cloneGameInfo });
+    this.props.history.push(`/game/${id}`);
   };
 
   teamSelectReset = () => {
@@ -212,6 +222,7 @@ export default class Newgame extends React.Component {
             size="large"
             block
             type="primary"
+            onClick={() => this.startGameHandler(this.idGenerator())}
           >
             Start Game!
           </Button>
