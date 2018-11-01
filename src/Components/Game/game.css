@@ -1,0 +1,27 @@
+:local .bidForm {
+  padding: 40px 0 0 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+:local .teamBox {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0;
+}
+
+:local .teamButton {
+  max-width: 100px;
+  width: 100%;
+}
+
+:local .playerSelect {
+  width: 77%;
+}
+
+:local .titleBox {
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+  font-size: 45px;
+  color: #00000070;
+}
