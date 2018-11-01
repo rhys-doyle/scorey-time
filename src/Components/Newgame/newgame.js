@@ -48,12 +48,19 @@ export default class Newgame extends React.Component {
   };
 
   startGameHandler = id => {
+    let playerNamesClone = this.state.playerNames.slice();
+    playerNamesClone.unshift(this.props.currentUser);
+    if (!this.state.teamSelect) {
+      this.handleRandomTeam();
+    }
     const cloneGameInfo = this.state.gameInfo.slice();
     cloneGameInfo.push({
       _id: id,
+      game: this.state.game,
       players: this.state.players,
       teams: this.state.teams,
-      team
+      teamSelect: this.state.teamSelect,
+      playerNames: playerNamesClone
     });
     this.setState({ gameInfo: cloneGameInfo });
     this.props.history.push(`/game/${id}`);
