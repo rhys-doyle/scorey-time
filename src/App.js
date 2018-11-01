@@ -11,7 +11,7 @@ import history from "./history";
 import Game from "./Components/Game/game";
 
 export default class App extends Component {
-  state = [];
+  state = {};
 
   childStateHandler = () => {};
 
