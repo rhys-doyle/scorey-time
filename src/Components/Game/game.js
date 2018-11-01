@@ -8,7 +8,10 @@ export default class Game extends React.Component {
   render() {
     return (
       <div className={styles.bidForm}>
-        <div className={styles.titleBox} children="Winning Bid" />
+        <div className={styles.titleBox}>
+          <h1 className={styles.titleHeader} children="Winning Bid" />
+        </div>
+        <div className={styles.handBox} children={`Hand #${1}`} />
         <div className={styles.teamBox}>
           <Button
             type="primary"
