@@ -18,11 +18,11 @@ export default class App extends Component {
   }
 
   newGameStateHandler = gameInfo => {
-    this.setState({ gameInfo });
+    // this.setState({ gameInfo });
   };
 
   loginStateHandler = username => {
-    this.setState({ username });
+    // this.setState({ username });
     console.log(this.state);
   };
 
