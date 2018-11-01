@@ -11,18 +11,16 @@ import history from "./history";
 import Game from "./Components/Game/game";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
+  state = {
+    username: undefined
+  };
 
   newGameStateHandler = gameInfo => {
-    // this.setState({ gameInfo });
+    this.setState({ gameInfo });
   };
 
   loginStateHandler = username => {
-    // this.setState({ username });
+    this.setState({ username });
     console.log(this.state);
   };
 
