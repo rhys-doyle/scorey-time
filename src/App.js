@@ -11,7 +11,11 @@ import history from "./history";
 import Game from "./Components/Game/game";
 
 export default class App extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
 
   newGameStateHandler = gameInfo => {
     this.setState({ gameInfo });
@@ -19,6 +23,7 @@ export default class App extends Component {
 
   loginStateHandler = username => {
     this.setState({ username });
+    console.log(this.state);
   };
 
   render() {
