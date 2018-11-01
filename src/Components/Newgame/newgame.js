@@ -62,8 +62,10 @@ export default class Newgame extends React.Component {
       teamSelect: this.state.teamSelect,
       playerNames: playerNamesClone
     });
-    this.setState({ gameInfo: cloneGameInfo });
-    this.props.history.push(`/game/${id}`);
+    this.setState({ gameInfo: cloneGameInfo }, () => {
+      this.props.gameInfoState(this.state.gameInfo);
+      this.props.history.push(`/game/${id}`);
+    });
   };
 
   teamSelectReset = () => {
@@ -243,7 +245,6 @@ export default class Newgame extends React.Component {
             type="primary"
             onClick={() => {
               this.startGameHandler(this.idGenerator());
-              this.props.gameInfoState(this.state.gameInfo);
             }}
           >
             Start Game!
