@@ -29,7 +29,18 @@ export default class App extends Component {
       <Router history={history}>
         <div className={styles.App}>
           <Header history={history} />
-          <Authentication>
+          <Route
+            exact
+            path="/login"
+            component={props => (
+              <Login
+                {...props}
+                history={history}
+                loginState={this.loginStateHandler}
+              />
+            )}
+          />
+          <Authentication history={history}>
             <Route path="/" exact render={() => <Redirect to="/userpage" />} />
             <Route path="/userpage" component={Userpage} />
             <Route
