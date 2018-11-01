@@ -18,7 +18,15 @@ export default class Game extends React.Component {
             className={styles.teamButton}
             children="Player"
           />
-          <Select placeholder="Select Player" className={styles.playerSelect} />
+          <Select
+            placeholder="Select Player"
+            className={styles.playerSelect}
+            // children={this.state.gameInfo[
+            //   this.state.gameInfo.length - 1
+            // ].playerNames.map(name => (
+            //   <Select.Option key={name}>@{name}</Select.Option>
+            // ))}
+          />
         </div>
         <div className={styles.suitBox} />
         <div className={styles.tricksBox} />
