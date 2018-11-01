@@ -13,9 +13,15 @@ export default class Newgame extends React.Component {
     game: games[0],
     teamsDisabled: false,
     threeDisabled: true,
-    teamConfig: "",
     teamSelect: "",
-    gameInfo: []
+    gameInfo: [],
+    playerNames: []
+  };
+
+  handlePlayerSelect = value => {
+    let playerNamesClone = this.state.playerNames.slice();
+    playerNamesClone.push(value);
+    this.setState({ playerNames: playerNamesClone });
   };
 
   idGenerator = () => {
