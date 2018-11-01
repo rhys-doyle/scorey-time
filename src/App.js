@@ -54,15 +54,11 @@ export default class App extends Component {
               )}
               history={history}
             />
-            <Route path="/game/:id" component={Game} />
+            <Route
+              path="/game/:id"
+              component={props => <Game {...props} appState={this.state} />}
+            />
           </Authentication>
-          <Route
-            exact
-            path="/login"
-            component={props => (
-              <Login {...props} loginState={this.loginStateHandler} />
-            )}
-          />
         </div>
       </Router>
     );
