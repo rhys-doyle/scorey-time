@@ -94,7 +94,7 @@ export default class Newgame extends React.Component {
     if (this.state.teams === "random") {
       if (this.state.players === 4) {
         let config = Math.random() * Math.floor(2);
-        this.setState({ teamConfig: this.state.game.players[0].teams[config] });
+        this.setState({ teamSelect: this.state.game.players[0].teams[config] });
       } else if (this.state.players === 6) {
         let config = Math.random() * Math.floor(24);
         let index = 1;
@@ -103,7 +103,7 @@ export default class Newgame extends React.Component {
           index = 0;
         }
         this.setState({
-          teamConfig: this.state.game.players[2].teams[index][config]
+          teamSelect: this.state.game.players[2].teams[index][config]
         });
       }
     }
