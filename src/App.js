@@ -13,7 +13,9 @@ import Game from "./Components/Game/game";
 export default class App extends Component {
   state = {};
 
-  childStateHandler = () => {};
+  newGameStateHandler = gameInfo => {
+    this.setState({ gameInfo });
+  };
 
   render() {
     return (
