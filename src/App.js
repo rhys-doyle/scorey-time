@@ -31,13 +31,24 @@ export default class App extends Component {
             <Route path="/userpage" component={Userpage} />
             <Route
               path="/newgame"
-              component={Newgame}
+              component={props => (
+                <Newgame
+                  {...props}
+                  gameInfoState={this.newGameStateHandler}
+                  currentUser={this.state.username}
+                />
+              )}
               history={history}
-              action={this.childStateHandler}
             />
             <Route path="/game/:id" component={Game} />
           </Authentication>
-          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/login"
+            component={props => (
+              <Login {...props} loginState={this.loginStateHandler} />
+            )}
+          />
         </div>
       </Router>
     );
