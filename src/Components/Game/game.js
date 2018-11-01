@@ -3,6 +3,8 @@ import styles from "./game.css";
 import { Button, Slider, Select, Radio, Icon } from "antd";
 
 export default class Game extends React.Component {
+  state = {};
+
   render() {
     return (
       <div className={styles.bidForm}>
