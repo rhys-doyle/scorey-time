@@ -13,10 +13,7 @@ export default class Game extends React.Component {
             className={styles.teamButton}
             children="Player"
           />
-          <Select
-            placeholder='Select Player'
-            className={styles.playerSelect}
-            children={}
+          <Select placeholder="Select Player" className={styles.playerSelect} />
         </div>
         <div className={styles.suitBox} />
         <div className={styles.tricksBox} />
