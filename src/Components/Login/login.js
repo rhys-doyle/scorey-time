@@ -64,9 +64,9 @@ class Login extends React.Component {
                   <Icon type="user" style={{ color: "rgba(0,0,0,0.25)" }} />
                 }
                 placeholder="Username"
-                onChange={event =>
-                  this.setState({ username: event.target.value })
-                }
+                onChange={event => {
+                  this.setState({ username: event.target.value });
+                }}
               />
             )}
           </FormItem>
