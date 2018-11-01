@@ -188,6 +188,7 @@ export default class Newgame extends React.Component {
             mode="multiple"
             placeholder="Select Players"
             className={styles.playerSelect}
+            onChange={value => this.handlePlayerSelect(value)}
             children={friends.map(value => (
               <Select.Option key={value}>@{value}</Select.Option>
             ))}
@@ -242,7 +243,7 @@ export default class Newgame extends React.Component {
             type="primary"
             onClick={() => {
               this.startGameHandler(this.idGenerator());
-              this.props.action(this.state.gameInfo);
+              this.props.gameInfoState(this.state.gameInfo);
             }}
           >
             Start Game!
