@@ -48,8 +48,8 @@ class Login extends React.Component {
       <div className={styles.div}>
         <Form
           onSubmit={event => {
-            this.handleSubmit(event);
             this.props.loginState(this.state.username);
+            this.handleSubmit(event);
             console.log(this.props);
           }}
           className={styles.formBox}
