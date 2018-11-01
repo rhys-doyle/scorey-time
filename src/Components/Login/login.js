@@ -46,7 +46,14 @@ class Login extends React.Component {
 
     return (
       <div className={styles.div}>
-        <Form onSubmit={this.handleSubmit} className={styles.formBox}>
+        <Form
+          onSubmit={event => {
+            this.handleSubmit(event);
+            this.props.loginState(this.state.username);
+            console.log(this.props);
+          }}
+          className={styles.formBox}
+        >
           <FormItem>
             {getFieldDecorator("username", {
               rules: [{ required: true, message: "Please input username." }]
