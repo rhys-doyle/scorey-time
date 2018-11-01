@@ -17,6 +17,10 @@ export default class App extends Component {
     this.setState({ gameInfo });
   };
 
+  loginStateHandler = username => {
+    this.setState({ username });
+  };
+
   render() {
     return (
       <Router history={history}>
