@@ -33,7 +33,8 @@ class Login extends React.Component {
               "token",
               JSON.stringify({
                 token: response.token,
-                expires: new Date().getTime() + response.expiresIn
+                expires: new Date().getTime() + response.expiresIn,
+                currentUser: this.state.username
               })
             )
           : localStorage.setItem("error", response.error);
@@ -49,7 +50,6 @@ class Login extends React.Component {
       <div className={styles.div}>
         <Form
           onSubmit={event => {
-            this.props.loginState(this.state.username);
             this.handleSubmit(event);
           }}
           className={styles.formBox}
