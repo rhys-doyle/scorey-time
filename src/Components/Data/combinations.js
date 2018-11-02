@@ -1,133 +1,164 @@
-// const totalPlayers = 6;
-// const teams = 2;
-// const playersPerTeam = totalPlayers / teams;
-// const players = [1, 2, 3, 4, 5, 6];
+const totalPlayers = 6;
+const teams = 2;
+const playersPerTeam = totalPlayers / teams;
+const players = [1, 2, 3, 4, 5, 6];
 
-// let team1 = [];
-// let team2;
-// let configs = [];
-// let lastPushed = [];
-// let totalConfigs = [];
-// const factorial = number => {
-//   let y = number;
-//   let x = number;
-//   for (let i = 1; i < number; i++) {
-//     y = y * (x - i);
-//     x = x - 1;
-//   }
-//   return y;
-// };
-// let playersClone = players.slice();
-// const randomIndex = arraySize => {
-//   return Math.round(Math.random() * (arraySize - 1));
-// };
-// const totalCombos =
-//   factorial(totalPlayers) /
-//   (factorial(playersPerTeam) * factorial(totalPlayers - playersPerTeam));
+let team1 = [];
+let team2;
+let configs = [];
+let lastPushed = [];
+let totalConfigs = [];
 
-// const generateTeams = () => {
-//   while (playersClone.length > playersPerTeam) {
-//     let player = randomIndex(playersClone.length);
-//     team1.push(playersClone[player]);
-//     playersClone.splice(player, 1);
+const factorial = number => {
+  let result = number;
+  if (number === 1 || number === 0) {
+    return 1;
+  }
+  while (number > 1) {
+    number--;
+    result *= number;
+  }
+  return result;
+};
 
-//     if (playersClone.length === playersPerTeam) {
-//       team2 = playersClone.slice().sort();
-//       team1 = team1.sort();
-//     }
-//   }
-// };
+let playersClone = players.slice();
+const randomIndex = arraySize => {
+  return Math.round(Math.random() * (arraySize - 1));
+};
+
+const totalCombos =
+  factorial(totalPlayers) /
+  (factorial(playersPerTeam) * factorial(totalPlayers - playersPerTeam));
+
+const generateTeams = () => {
+  if (team1.length) {
+    team1.splice(0, 3);
+    team2.splice(0, 3);
+    configs.splice(0, 2);
+  }
+  while (playersClone.length > playersPerTeam) {
+    let player = randomIndex(playersClone.length);
+    team1.push(playersClone[player]);
+    playersClone.splice(player, 1);
+    if (playersClone.length === playersPerTeam) {
+      team2 = playersClone.slice().sort();
+      team1 = team1.sort();
+    }
+  }
+};
+
+const fillTotalConfigs = () => {
+  generateTeams();
+  if (lastPushed.length === 0) {
+    lastPushed.splice(0, 0, team1);
+    configs.splice(0, 0, team1, team2);
+    totalConfigs.splice(0, 0, configs);
+  } else if (lastPushed.length > 0) {
+    if (lastPushed.find(combo => combo === team1)) {
+      generateTeams();
+    } else {
+      lastPushed.splice(lastPushed.length - 1, 0, team1);
+      configs.splice(0, 0, team1, team2);
+      totalConfigs.splice(totalConfigs.length - 1, 0, configs);
+    }
+  }
+};
+
+const configsLoop = () => {
+  fillTotalConfigs();
+  fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+  // fillTotalConfigs();
+};
+configsLoop();
+console.log(lastPushed[0]);
+console.log(totalConfigs);
 
 // const newConfig = () => {
+//   generateTeams();
 //   const exists = lastPushed.find(value => value === team1);
-//   if (exists) {
+//   if (lastPushed.length !== 0 && exists) {
 //     generateTeams();
 //   } else {
-//     lastPushed.push(team1, team2);
-//     configs.push(team1, team2);
-//     totalConfigs.push(configs);
-//     configs.splice(0, 2);
+//     lastPushed[lastPushed.length] = team1;
+//     totalConfigs[totalConfigs.length] = [team1, team2];
 //     team1.splice(0, 3);
 //     team2.splice(0, 3);
 //   }
 // };
 
-// const fillConfigs = () => {
-//   generateTeams();
-//   while (totalConfigs.length < totalCombos) {
-//     newConfig();
+// const totalPlayers = 6;
+// const teamCounts = [2];
+
+// const teams = [];
+
+// teamCounts.forEach(teamCount => {
+//   const playersPerTeam = totalPlayers / teamCount;
+//   const playersArrayNew = new Array(totalPlayers);
+//   const playersArray = [];
+
+//   for (var i = 0; i < playersArrayNew.length; i++) {
+//     playersArray.push(i + 1);
 //   }
-// };
 
-// fillConfigs();
-// console.log(totalConfigs);
+//   function combo(c) {
+//     var r = [],
+//       len = c.length,
+//       tmp = [];
+//     function nodup() {
+//       var got = {};
+//       for (var l = 0; l < tmp.length; l++) {
+//         if (got[tmp[l]]) return false;
+//         got[tmp[l]] = true;
+//       }
+//       return true;
+//     }
+//     function iter(col, done) {
+//       var l, rr;
+//       if (col === len) {
+//         if (nodup()) {
+//           rr = [];
+//           for (l = 0; l < tmp.length; l++) rr.push(c[tmp[l]]);
+//           r.push(rr);
+//         }
+//       } else {
+//         for (l = 0; l < len; l++) {
+//           tmp[col] = l;
+//           iter(col + 1);
+//         }
+//       }
+//     }
+//     iter(0);
+//     return r;
+//   }
 
-// // const totalPlayers = 6;
-// // const teamCounts = [2];
+//   // console.log(playersArray);
 
-// // const teams = [];
+//   let totalCombinations = combo(playersArray);
 
-// // teamCounts.forEach(teamCount => {
-// //   const playersPerTeam = totalPlayers / teamCount;
-// //   const playersArrayNew = new Array(totalPlayers);
-// //   const playersArray = [];
+//   totalCombinations = totalCombinations.map(combination => {
+//     let temparray = [];
+//     var i, j;
+//     for (i = 0, j = combination.length; i < j; i += playersPerTeam) {
+//       const unordered = combination.slice(i, i + playersPerTeam);
+//       temparray.push(unordered.sort());
+//       // do whatever
+//     }
 
-// //   for (var i = 0; i < playersArrayNew.length; i++) {
-// //     playersArray.push(i + 1);
-// //   }
+//     return temparray;
+//   });
 
-// //   function combo(c) {
-// //     var r = [],
-// //       len = c.length,
-// //       tmp = [];
-// //     function nodup() {
-// //       var got = {};
-// //       for (var l = 0; l < tmp.length; l++) {
-// //         if (got[tmp[l]]) return false;
-// //         got[tmp[l]] = true;
-// //       }
-// //       return true;
-// //     }
-// //     function iter(col, done) {
-// //       var l, rr;
-// //       if (col === len) {
-// //         if (nodup()) {
-// //           rr = [];
-// //           for (l = 0; l < tmp.length; l++) rr.push(c[tmp[l]]);
-// //           r.push(rr);
-// //         }
-// //       } else {
-// //         for (l = 0; l < len; l++) {
-// //           tmp[col] = l;
-// //           iter(col + 1);
-// //         }
-// //       }
-// //     }
-// //     iter(0);
-// //     return r;
-// //   }
+//   const existing = [];
 
-// //   // console.log(playersArray);
+//   console.log(totalCombinations);
 
-// //   let totalCombinations = combo(playersArray);
+//   teams.push(totalCombinations);
+// });
 
-// //   totalCombinations = totalCombinations.map(combination => {
-// //     let temparray = [];
-// //     var i, j;
-// //     for (i = 0, j = combination.length; i < j; i += playersPerTeam) {
-// //       const unordered = combination.slice(i, i + playersPerTeam);
-// //       temparray.push(unordered.sort());
-// //       // do whatever
-// //     }
-
-// //     return temparray;
-// //   });
-
-// //   const existing = [];
-
-// //   console.log(totalCombinations);
-
-// //   teams.push(totalCombinations);
-// // });
-
-// // // console.log(teams);
+// // console.log(teams);
