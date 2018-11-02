@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio, Select, Button } from "antd";
+import { message, Radio, Select, Button } from "antd";
 import styles from "./newgame.css";
 import games from "../Data/games";
 import friends from "../Data/friends";
@@ -19,8 +19,8 @@ export default class Newgame extends React.Component {
   };
 
   handlePlayerSelect = value => {
-    let playerNamesClone = this.state.playerNames.slice();
-    playerNamesClone.push(value);
+    let playerNamesClone = value.slice();
+    console.log(value);
     this.setState({ playerNames: playerNamesClone });
   };
 
@@ -48,24 +48,28 @@ export default class Newgame extends React.Component {
   };
 
   startGameHandler = id => {
-    let playerNamesClone = this.state.playerNames.slice();
-    playerNamesClone.unshift(this.props.currentUser);
-    if (!this.state.teamSelect) {
-      this.handleRandomTeam();
+    if (this.state.playerNames.length < this.state.players - 1) {
+      message.error("Please select 1 more player to continue!", 10);
+    } else {
+      let playerNamesClone = this.state.playerNames.slice();
+      playerNamesClone.unshift(this.props.currentUser);
+      if (!this.state.teamSelect) {
+        this.handleRandomTeam();
+      }
+      const cloneGameInfo = this.state.gameInfo.slice();
+      cloneGameInfo.push({
+        _id: id,
+        game: this.state.game,
+        players: this.state.players,
+        teams: this.state.teams,
+        teamSelect: this.state.teamSelect,
+        playerNames: playerNamesClone
+      });
+      this.setState({ gameInfo: cloneGameInfo }, () => {
+        this.props.gameInfoState(this.state.gameInfo);
+        this.props.history.push(`/game/${id}`);
+      });
     }
-    const cloneGameInfo = this.state.gameInfo.slice();
-    cloneGameInfo.push({
-      _id: id,
-      game: this.state.game,
-      players: this.state.players,
-      teams: this.state.teams,
-      teamSelect: this.state.teamSelect,
-      playerNames: playerNamesClone
-    });
-    this.setState({ gameInfo: cloneGameInfo }, () => {
-      this.props.gameInfoState(this.state.gameInfo);
-      this.props.history.push(`/game/${id}`);
-    });
   };
 
   teamSelectReset = () => {
@@ -188,7 +192,7 @@ export default class Newgame extends React.Component {
           </Radio.Group>
           <Select
             mode="multiple"
-            placeholder="Select Players"
+            placeholder={`Select ${this.state.players - 1} Players`}
             className={styles.playerSelect}
             onChange={value => this.handlePlayerSelect(value)}
             children={friends.map(value => (
