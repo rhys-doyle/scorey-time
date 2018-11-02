@@ -59,6 +59,21 @@
 }
 :local .suitButton {
   padding: 0 6.1px;
+  font-size: 15px;
+}
+
+:local .trumpsButton {
+  padding: 0 6.1px;
+  font-size: 10px;
+}
+
+:local .misereButton {
+  padding: 0 6.1px;
+  font-size: 10px;
+}
+
+:local .openButton {
+  padding: 0 6.1px;
   font-size: 10px;
 }
 
@@ -75,4 +90,8 @@
 :local .tricksButton {
   width: 100%;
   max-width: 100px;
+}
+
+.black {
+  color: red;
 }
