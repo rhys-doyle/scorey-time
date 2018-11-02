@@ -11,17 +11,10 @@ import history from "./history";
 import Game from "./Components/Game/game";
 
 export default class App extends Component {
-  state = {
-    username: undefined
-  };
+  state = {};
 
   newGameStateHandler = gameInfo => {
     this.setState({ gameInfo });
-  };
-
-  loginStateHandler = username => {
-    this.setState({ username });
-    console.log(this.state);
   };
 
   render() {
@@ -32,13 +25,7 @@ export default class App extends Component {
           <Route
             exact
             path="/login"
-            component={props => (
-              <Login
-                {...props}
-                history={history}
-                loginState={this.loginStateHandler}
-              />
-            )}
+            component={props => <Login {...props} history={history} />}
           />
           <Authentication history={history}>
             <Route path="/" exact render={() => <Redirect to="/userpage" />} />
@@ -46,11 +33,7 @@ export default class App extends Component {
             <Route
               path="/newgame"
               component={props => (
-                <Newgame
-                  {...props}
-                  gameInfoState={this.newGameStateHandler}
-                  currentUser={this.state.username}
-                />
+                <Newgame {...props} gameInfoState={this.newGameStateHandler} />
               )}
               history={history}
             />
