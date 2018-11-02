@@ -9,6 +9,7 @@ export default class Authentication extends React.Component {
       pathname !== "/login" &&
       (!token || token.expires < new Date().getTime())
     ) {
+      localStorage.removeItem("currentUser");
       return <Redirect to="/login" />;
     } else {
       return this.props.children;
