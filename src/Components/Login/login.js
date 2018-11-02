@@ -14,31 +14,32 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form", values);
       }
     });
+
     fetch(process.env.REACT_APP_ENDPOINT_URL, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(this.state)
     })
       .then(res => res.json())
-      .catch(error => console.log("Error: ", error))
       .then(response => {
-        this.setState({ response });
-        this.state.response.token
+        response.token
           ? localStorage.setItem(
               "token",
               JSON.stringify({
-                token: this.state.response.token,
-                expires: new Date().getTime() + this.state.response.expiresIn
+                token: response.token,
+                expires: new Date().getTime() + response.expiresIn
               })
             )
-          : localStorage.setItem("error", this.state.response.error);
+          : localStorage.setItem("error", response.error);
         this.props.history.push("/userpage");
-      });
+      })
+      .catch(error => console.log("Error: ", error));
   };
 
   render() {
@@ -50,7 +51,6 @@ class Login extends React.Component {
           onSubmit={event => {
             this.props.loginState(this.state.username);
             this.handleSubmit(event);
-            console.log(this.props);
           }}
           className={styles.formBox}
         >
