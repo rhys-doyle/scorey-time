@@ -1,4 +1,5 @@
 :local .bidForm {
+  font-family: "Roboto Slab", serif;
   padding: 40px 0 0 0;
   max-width: 500px;
   margin: 0 auto;
@@ -58,23 +59,8 @@
   padding: 0 0 40px 0;
 }
 :local .suitButton {
-  padding: 0 6.1px;
   font-size: 15px;
-}
-
-:local .trumpsButton {
   padding: 0 6.1px;
-  font-size: 10px;
-}
-
-:local .misereButton {
-  padding: 0 6.1px;
-  font-size: 10px;
-}
-
-:local .openButton {
-  padding: 0 6.1px;
-  font-size: 10px;
 }
 
 :local .tricksBox {
@@ -92,6 +78,18 @@
   max-width: 100px;
 }
 
-.black {
+:local .blackSuit {
+  color: #000000;
+  font-size: 18px;
+  padding: 0 11px;
+}
+
+:local .redSuit {
   color: red;
+  font-size: 15px;
+  padding: 0 11px;
+}
+
+:local .diamonds {
+  font-size: 18px;
 }
