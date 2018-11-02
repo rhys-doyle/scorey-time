@@ -6,6 +6,7 @@ export default class Game extends React.Component {
   state = {};
 
   render() {
+    console.log(this.props.appState);
     return (
       <div className={styles.bidForm}>
         <div className={styles.titleBox}>
@@ -45,40 +46,40 @@ export default class Game extends React.Component {
             <Radio.Button
               className={styles.suitButton}
               value="Spades"
-              children="Spades"
+              children="♠️"
             />
             <Radio.Button
               className={styles.suitButton}
               value="Clubs"
-              children="Clubs"
+              children="♣️"
             />
             <Radio.Button
               className={styles.suitButton}
               value="Diamonds"
-              children="Diamonds"
+              children="♦️"
             />
             <Radio.Button
               className={styles.suitButton}
               value="Hearts"
-              children="Hearts"
+              children="❤️"
             />
             <Radio.Button
               className={styles.suitButton}
               disabled
               value="No Trumps"
-              children="No Trumps"
+              children="🚫"
             />
             <Radio.Button
               className={styles.suitButton}
               disabled
-              value="Misere"
-              children="Misere"
+              value="Misère"
+              children="Misère"
             />
             <Radio.Button
               className={styles.suitButton}
               disabled
-              value="Open Misere"
-              children="Open Misere"
+              value="Open Misère"
+              children="Open Misère"
             />
           </Radio.Group>
         </div>
