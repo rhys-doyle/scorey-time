@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./game.css";
 import { Button, Slider, Select, Radio, Icon } from "antd";
+import classnames from "classnames";
 
 export default class Game extends React.Component {
   state = {};
@@ -44,7 +45,10 @@ export default class Game extends React.Component {
             // onChange={this.handleSuitChange}
           >
             <Radio.Button
-              className={styles.suitButton}
+              className={classnames({
+                suitButton: true,
+                black: true
+              })}
               value="Spades"
               children="♠️"
             />
@@ -61,22 +65,22 @@ export default class Game extends React.Component {
             <Radio.Button
               className={styles.suitButton}
               value="Hearts"
-              children="❤️"
+              children="♥︎"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={styles.trumpsButton}
               disabled
               value="No Trumps"
-              children="🚫"
+              children="No Trumps"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={styles.misereButton}
               disabled
               value="Misère"
               children="Misère"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={styles.openButton}
               disabled
               value="Open Misère"
               children="Open Misère"
