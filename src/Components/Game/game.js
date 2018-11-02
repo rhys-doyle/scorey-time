@@ -31,14 +31,13 @@ export default class Game extends React.Component {
   };
 
   render() {
-    console.log(this.props.appState);
     return (
       <div className={styles.bidForm}>
         <div className={styles.titleBox}>
           <h1 className={styles.titleHeader} children="Winning Bid" />
         </div>
         <div className={styles.handBox}>
-          {`Hand #${1}`}
+          {`Hand #${this.state.handNumber}`}
           <div className={styles.borderBox} />
         </div>
         <div className={styles.teamBox}>
@@ -49,12 +48,14 @@ export default class Game extends React.Component {
           />
           <Select
             placeholder="Select Player"
+            value={this.state.biddingPlayer}
             className={styles.playerSelect}
-            // children={this.state.gameInfo[
-            //   this.state.gameInfo.length - 1
-            // ].playerNames.map(name => (
-            //   <Select.Option key={name}>@{name}</Select.Option>
-            // ))}
+            children={this.state.gameInfo[
+              this.state.gameInfo.length - 1
+            ].playerNames.map(name => (
+              <Select.Option key={name}>@{name}</Select.Option>
+            ))}
+            onChange={value => this.setState({ biddingPlayer: value })}
           />
         </div>
         <div className={styles.suitBox}>
@@ -65,46 +66,65 @@ export default class Game extends React.Component {
           />
           <Radio.Group
             className={styles.suitRadio}
-            value="Spades"
-            // onChange={this.handleSuitChange}
+            value={this.state.suit}
+            onChange={event => this.setState({ suit: event.target.value })}
           >
             <Radio.Button
               className={classnames({
-                suitButton: true,
-                black: true
+                [styles.suitButton]: true,
+                [styles.blackSuit]: true
               })}
               value="Spades"
               children="♠️"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.blackSuit]: true
+              })}
               value="Clubs"
               children="♣️"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.redSuit]: true,
+                [styles.diamonds]: true
+              })}
               value="Diamonds"
-              children="♦️"
+              children="♦"
             />
             <Radio.Button
-              className={styles.suitButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.redSuit]: true
+              })}
               value="Hearts"
               children="♥︎"
             />
             <Radio.Button
-              className={styles.trumpsButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.noTrumps]: true
+              })}
               disabled
               value="No Trumps"
               children="No Trumps"
             />
             <Radio.Button
-              className={styles.misereButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.misereButton]: true
+              })}
               disabled
               value="Misère"
               children="Misère"
             />
             <Radio.Button
-              className={styles.openButton}
+              className={classnames({
+                [styles.suitButton]: true,
+                [styles.openButton]: true
+              })}
               disabled
               value="Open Misère"
               children="Open Misère"
@@ -122,7 +142,8 @@ export default class Game extends React.Component {
             max={10}
             min={6}
             step={1}
-            // onChange={}
+            value={this.state.tricksNumber}
+            onChange={value => this.setState({ tricksNumber: value })}
           />
         </div>
         <div className={styles.confirmBox}>
@@ -131,8 +152,8 @@ export default class Game extends React.Component {
             className={styles.confirmButton}
             block
             size="large"
-            //onClick={}
-            children="Confirm Winning Bid"
+            onClick={this.handleConfirmBid}
+            children="CONFIRM WINNING BID"
           />
         </div>
       </div>
