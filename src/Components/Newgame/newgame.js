@@ -49,21 +49,29 @@ export default class Newgame extends React.Component {
 
   startGameHandler = id => {
     if (this.state.playerNames.length < this.state.players - 1) {
-      message.error("Please select 1 more player to continue!", 10);
+      message.error(
+        `Please select ${this.state.players -
+          1 -
+          this.state.playerNames.length} more player to continue!`,
+        4
+      );
     } else {
       let playerNamesClone = this.state.playerNames.slice();
-      playerNamesClone.unshift(this.props.currentUser);
+      playerNamesClone.unshift(
+        JSON.parse(localStorage.getItem("token")).currentUser
+      );
       if (!this.state.teamSelect) {
         this.handleRandomTeam();
       }
       const cloneGameInfo = this.state.gameInfo.slice();
       cloneGameInfo.push({
         _id: id,
-        game: this.state.game,
+        game: this.state.game.name,
         players: this.state.players,
         teams: this.state.teams,
         teamSelect: this.state.teamSelect,
-        playerNames: playerNamesClone
+        playerNames: playerNamesClone,
+        gameStart: new Date()
       });
       this.setState({ gameInfo: cloneGameInfo }, () => {
         this.props.gameInfoState(this.state.gameInfo);
@@ -97,7 +105,7 @@ export default class Newgame extends React.Component {
   };
 
   handleRandomTeam = () => {
-    if (this.state.teams === "random") {
+    if (this.state.teams === "random" || !this.state.teamSelect) {
       if (this.state.players === 4) {
         let config = Math.random() * Math.floor(2);
         this.setState({ teamSelect: this.state.game.players[0].teams[config] });
