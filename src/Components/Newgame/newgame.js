@@ -63,6 +63,44 @@ export default class Newgame extends React.Component {
       if (!this.state.teamSelect) {
         this.handleRandomTeam();
       }
+
+      let teamsConfig = [];
+
+      if (this.state.teamSelect.length === 16) {
+        let team1 = [];
+        let team2 = [];
+        let team3 = [];
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
+        teamsConfig.push(team1);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(7)]);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
+        teamsConfig.push(team2);
+        team3.push(this.state.playerNames[this.state.teamSelect.charAt(14)]);
+        team3.push(this.state.playerNames[this.state.teamSelect.charAt(16)]);
+        teamsConfig.push(team3);
+      } else if (this.state.teamSelect.length === 13) {
+        let team1 = [];
+        let team2 = [];
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(4)]);
+        teamsConfig.push(team1);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(11)]);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(13)]);
+        teamsConfig.push(team2);
+      } else {
+        let team1 = [];
+        let team2 = [];
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
+        teamsConfig.push(team1);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(7)]);
+        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
+        teamsConfig.push(team2);
+      }
+
       const cloneGameInfo = this.state.gameInfo.slice();
       cloneGameInfo.push({
         _id: id,
@@ -71,6 +109,7 @@ export default class Newgame extends React.Component {
         teams: this.state.teams,
         teamSelect: this.state.teamSelect,
         playerNames: playerNamesClone,
+        teamsConfig: teamsConfig,
         gameStart: new Date()
       });
       this.setState({ gameInfo: cloneGameInfo }, () => {
