@@ -60,44 +60,49 @@ export default class Newgame extends React.Component {
       playerNamesClone.unshift(
         JSON.parse(localStorage.getItem("token")).currentUser
       );
-      if (!this.state.teamSelect) {
-        this.handleRandomTeam();
-      }
 
+      console.log(this.state.teamSelect, this.state.teams);
+
+      let teamSelect = this.state.teamSelect;
+
+      if (!teamSelect || this.state.teams === "random") {
+        teamSelect = this.handleRandomTeam();
+      }
+      console.log(teamSelect, "handler");
       let teamsConfig = [];
 
-      if (this.state.teamSelect.length === 16) {
+      if (teamSelect.length === 16) {
         let team1 = [];
         let team2 = [];
         let team3 = [];
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(7)]);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(7)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
         teamsConfig.push(team2);
-        team3.push(this.state.playerNames[this.state.teamSelect.charAt(14)]);
-        team3.push(this.state.playerNames[this.state.teamSelect.charAt(16)]);
+        team3.push(this.state.playerNames[teamSelect.charAt(14)]);
+        team3.push(this.state.playerNames[teamSelect.charAt(16)]);
         teamsConfig.push(team3);
-      } else if (this.state.teamSelect.length === 13) {
+      } else if (teamSelect.length === 13) {
         let team1 = [];
         let team2 = [];
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(4)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(4)]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(11)]);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(13)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(11)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(13)]);
         teamsConfig.push(team2);
       } else {
         let team1 = [];
         let team2 = [];
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[this.state.teamSelect.charAt(2)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
+        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(7)]);
-        team2.push(this.state.playerNames[this.state.teamSelect.charAt(9)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(7)]);
+        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
         teamsConfig.push(team2);
       }
 
@@ -107,11 +112,12 @@ export default class Newgame extends React.Component {
         game: this.state.game.name,
         players: this.state.players,
         teams: this.state.teams,
-        teamSelect: this.state.teamSelect,
+        teamSelect: teamSelect,
         playerNames: playerNamesClone,
         teamsConfig: teamsConfig,
         gameStart: new Date()
       });
+      console.log(cloneGameInfo);
       this.setState({ gameInfo: cloneGameInfo }, () => {
         this.props.gameInfoState(this.state.gameInfo);
         this.props.history.push(`/game/${id}`);
@@ -144,21 +150,17 @@ export default class Newgame extends React.Component {
   };
 
   handleRandomTeam = () => {
-    if (this.state.teams === "random" || !this.state.teamSelect) {
-      if (this.state.players === 4) {
-        let config = Math.random() * Math.floor(2);
-        this.setState({ teamSelect: this.state.game.players[0].teams[config] });
-      } else if (this.state.players === 6) {
-        let config = Math.random() * Math.floor(24);
-        let index = 1;
+    if (this.state.players === 4) {
+      let config = Math.round(Math.random() * Math.floor(2));
+      return this.state.game.players[0].teams[config];
+    } else if (this.state.players === 6) {
+      let config = Math.round(Math.random() * Math.floor(24));
+      let index = 1;
 
-        if (config < 10) {
-          index = 0;
-        }
-        this.setState({
-          teamSelect: this.state.game.players[2].teams[index][config]
-        });
+      if (config < 10) {
+        index = 0;
       }
+      return this.state.game.players[2].teams[index][config];
     }
   };
 
