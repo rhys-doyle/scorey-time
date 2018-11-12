@@ -2,7 +2,7 @@
   font-family: "Roboto Slab", serif;
   padding: 40px 0 0 0;
   max-width: 500px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 :local .teamBox {
@@ -92,4 +92,21 @@
 
 :local .diamonds {
   font-size: 18px;
+}
+
+:local .biddingScoring {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+:local .scoreSheet {
+  padding: 40px 0 0 0;
+  max-width: 500px;
+  font-family: "Roboto Slab", serif;
+  width: 100%;
+}
+
+:local .scoreTeams {
+  display: flex;
+  justify-content: space-between;
 }
