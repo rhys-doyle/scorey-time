@@ -28,24 +28,25 @@ export default class Game extends React.Component {
       biddingPlayer: "",
       tricksNumber: 6
     });
+    console.log(this.state.gameInfo);
   };
 
   buildTeams = () => {
-    if (this.state.gameInfo.teamsConfig.length === 3) {
-      this.state.gameInfo.teamsConfig.map((team, index) => {
+    this.state.gameInfo[this.state.gameInfo.length - 1].teamsConfig.map(
+      (team, index) => {
         return (
-          <div className={styles.teamSpan} key={`team ${index + 1}`}>
+          <div className={styles.teamBox} key={`team ${index + 1}`}>
             {team.map(player => {
               return (
-                <span className={styles.teamMembers} key={player}>
+                <span className={styles.playerSpan} key={player}>
                   {player}
                 </span>
               );
             })}
           </div>
         );
-      });
-    }
+      }
+    );
   };
 
   render() {
@@ -180,8 +181,10 @@ export default class Game extends React.Component {
           <div className={styles.titleBox}>
             <h1 className={styles.titleHeader} children="Score Sheet" />
           </div>
-
-          <div className={styles.separator} />
+          <div
+            className={styles.scoreTeams}
+            children={console.log(this.state.gameInfo)}
+          />
         </div>
       </div>
     );
