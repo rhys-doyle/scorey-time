@@ -30,6 +30,24 @@ export default class Game extends React.Component {
     });
   };
 
+  buildTeams = () => {
+    if (this.state.gameInfo.teamsConfig.length === 3) {
+      this.state.gameInfo.teamsConfig.map((team, index) => {
+        return (
+          <div className={styles.teamSpan} key={`team ${index + 1}`}>
+            {team.map(player => {
+              return (
+                <span className={styles.teamMembers} key={player}>
+                  {player}
+                </span>
+              );
+            })}
+          </div>
+        );
+      });
+    }
+  };
+
   render() {
     return (
       <div className={styles.bidForm}>
