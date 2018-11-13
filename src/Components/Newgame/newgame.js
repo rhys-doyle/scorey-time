@@ -61,7 +61,7 @@ export default class Newgame extends React.Component {
         JSON.parse(localStorage.getItem("token")).currentUser
       );
 
-      console.log(this.state.teamSelect, this.state.teams);
+      console.log(playerNamesClone);
 
       let teamSelect = this.state.teamSelect;
 
@@ -71,38 +71,38 @@ export default class Newgame extends React.Component {
       console.log(teamSelect, "handler");
       let teamsConfig = [];
 
-      if (teamSelect.length === 16) {
+      if (teamSelect.length === 17) {
         let team1 = [];
         let team2 = [];
         let team3 = [];
-        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
+        team1.push(playerNamesClone[teamSelect.charAt(0) - 1]);
+        team1.push(playerNamesClone[teamSelect.charAt(2) - 1]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[teamSelect.charAt(7)]);
-        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
+        team2.push(playerNamesClone[teamSelect.charAt(7) - 1]);
+        team2.push(playerNamesClone[teamSelect.charAt(9) - 1]);
         teamsConfig.push(team2);
-        team3.push(this.state.playerNames[teamSelect.charAt(14)]);
-        team3.push(this.state.playerNames[teamSelect.charAt(16)]);
+        team3.push(playerNamesClone[teamSelect.charAt(14) - 1]);
+        team3.push(playerNamesClone[teamSelect.charAt(16) - 1]);
         teamsConfig.push(team3);
-      } else if (teamSelect.length === 13) {
+      } else if (teamSelect.length === 14) {
         let team1 = [];
         let team2 = [];
-        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
-        team1.push(this.state.playerNames[teamSelect.charAt(4)]);
+        team1.push(playerNamesClone[teamSelect.charAt(0) - 1]);
+        team1.push(playerNamesClone[teamSelect.charAt(2) - 1]);
+        team1.push(playerNamesClone[teamSelect.charAt(4) - 1]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
-        team2.push(this.state.playerNames[teamSelect.charAt(11)]);
-        team2.push(this.state.playerNames[teamSelect.charAt(13)]);
+        team2.push(playerNamesClone[teamSelect.charAt(9) - 1]);
+        team2.push(playerNamesClone[teamSelect.charAt(11) - 1]);
+        team2.push(playerNamesClone[teamSelect.charAt(13) - 1]);
         teamsConfig.push(team2);
-      } else {
+      } else if (teamSelect.length === 10) {
         let team1 = [];
         let team2 = [];
-        team1.push(this.state.playerNames[teamSelect.charAt(0)]);
-        team1.push(this.state.playerNames[teamSelect.charAt(2)]);
+        team1.push(playerNamesClone[teamSelect.charAt(0) - 1]);
+        team1.push(playerNamesClone[teamSelect.charAt(2) - 1]);
         teamsConfig.push(team1);
-        team2.push(this.state.playerNames[teamSelect.charAt(7)]);
-        team2.push(this.state.playerNames[teamSelect.charAt(9)]);
+        team2.push(playerNamesClone[teamSelect.charAt(7) - 1]);
+        team2.push(playerNamesClone[teamSelect.charAt(9) - 1]);
         teamsConfig.push(team2);
       }
 
