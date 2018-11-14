@@ -32,21 +32,24 @@ export default class Game extends React.Component {
   };
 
   buildTeams = () => {
-    this.state.gameInfo[this.state.gameInfo.length - 1].teamsConfig.map(
-      (team, index) => {
-        return (
-          <div className={styles.teamBox} key={`team ${index + 1}`}>
-            {team.map(player => {
-              return (
-                <span className={styles.playerSpan} key={player}>
-                  {player}
-                </span>
-              );
-            })}
-          </div>
-        );
-      }
-    );
+    const currentGame = this.state.gameInfo[this.state.gameInfo.length - 1];
+    return currentGame.teamsConfig.map((team, index) => {
+      return (
+        <div className={styles.teamMembers} key={`team ${index + 1}`}>
+          {team.map((player, index) => {
+            return (
+              <span className={styles.playerSpan} key={player}>
+                {currentGame.teamSelect.length === 14 && index < 2
+                  ? `${player} & `
+                  : currentGame.teamSelect.length !== 14 && index < 1
+                  ? `${player} & `
+                  : player}
+              </span>
+            );
+          })}
+        </div>
+      );
+    });
   };
 
   render() {
@@ -181,10 +184,11 @@ export default class Game extends React.Component {
           <div className={styles.titleBox}>
             <h1 className={styles.titleHeader} children="Score Sheet" />
           </div>
-          <div
-            className={styles.scoreTeams}
-            children={console.log(this.state.gameInfo)}
-          />
+          <div className={styles.handBox}>
+            {`ID: ${this.state.gameInfo[this.state.gameInfo.length - 1]._id}`}
+            <div className={styles.borderBox} />
+          </div>
+          <div className={styles.scoreTeams}>{this.buildTeams()}</div>
         </div>
       </div>
     );
