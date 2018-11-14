@@ -6,7 +6,7 @@ import classnames from "classnames";
 export default class Game extends React.Component {
   state = {
     gameInfo: this.props.appState.gameInfo,
-    round: [],
+    bids: [],
     handNumber: 1,
     suit: "Spades",
     biddingPlayer: "",
@@ -14,15 +14,15 @@ export default class Game extends React.Component {
   };
 
   handleConfirmBid = () => {
-    let roundClone = this.state.round.slice();
-    roundClone.push({
+    let bidsClone = this.state.bids.slice();
+    bidsClone.push({
       handNumber: this.state.handNumber,
       suit: this.state.suit,
       tricksNumber: this.state.tricksNumber,
       biddingPlayer: this.state.biddingPlayer
     });
     this.setState({
-      round: roundClone,
+      bids: bidsClone,
       handNumber: this.state.handNumber + 1,
       suit: "Spades",
       biddingPlayer: "",
