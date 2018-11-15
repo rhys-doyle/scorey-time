@@ -41,7 +41,7 @@ export default class Game extends React.Component {
     this.state.round[this.state.round.length - 1].map((team, index) => {
       return (
         <div className={styles.teamScore} key={`team ${index + 1}`}>
-          <span>{this.state.pointsScored}</span>
+          <span>hello</span>
           <Select
             className={styles.tricksSelect}
             value={this.state.tricksWon[index]}
@@ -52,7 +52,10 @@ export default class Game extends React.Component {
             }}
           >
             {totalTricks.map((tricks, index) => {
-              <Select.Option key={`${index}-${tricks}`}>
+              <Select.Option
+                value={tricks === 10 ? tricks : `0${tricks}`}
+                key={`${index}-${tricks}`}
+              >
                 {tricks}
               </Select.Option>;
             })}
@@ -64,6 +67,62 @@ export default class Game extends React.Component {
 
   handlePointsScored = index => {
     let roundClone = this.state.round.slice();
+    const bid = roundClone[roundClone.length - 1][index][0];
+    let pointsScoredClone = this.state.pointsScored.slice();
+    const bidNumber = parseInt(bid.charAt(0), 10);
+    if (bid === "DEF") {
+      pointsScoredClone[index] = this.state.tricksWon[index] * 10;
+    } else {
+      switch (bid.length === 2 ? bid.charAt(1) : bid.charAt(2)) {
+        case "♠︎":
+          pointsScoredClone[index] =
+            bidNumber !== 1 && bidNumber <= this.state.tricksWon
+              ? scoringTable.spades[bidNumber - 6]
+              : bidNumber !== 1 && bidNumber <= 8 && this.state.tricksWon === 10
+              ? 250
+              : bidNumber === 1 && this.state.tricksWon === 10
+              ? scoringTable.spades[bidNumber + 3]
+              : bidNumber === 1 && this.state.tricksWon !== 10
+              ? -1 * scoringTable.spades[bidNumber + 3]
+              : -1 * scoringTable.spades[bidNumber - 6];
+          break;
+        case "♣︎":
+          pointsScoredClone[index] =
+            bidNumber !== 1 && bidNumber <= this.state.tricksWon
+              ? scoringTable.clubs[bidNumber - 6]
+              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
+              ? 250
+              : bidNumber === 1 && this.state.tricksWon === 10
+              ? scoringTable.clubs[bidNumber + 3]
+              : bidNumber === 1 && this.state.tricksWon !== 10
+              ? -1 * scoringTable.clubs[bidNumber + 3]
+              : -1 * scoringTable.clubs[bidNumber - 6];
+          break;
+        case "♦︎":
+          pointsScoredClone[index] =
+            bidNumber !== 1 && bidNumber <= this.state.tricksWon
+              ? scoringTable.diamonds[bidNumber - 6]
+              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
+              ? 250
+              : bidNumber === 1 && this.state.tricksWon === 10
+              ? scoringTable.diamonds[bidNumber + 3]
+              : bidNumber === 1 && this.state.tricksWon !== 10
+              ? -1 * scoringTable.diamonds[bidNumber + 3]
+              : -1 * scoringTable.diamonds[bidNumber - 6];
+          break;
+        case "♥︎":
+          pointsScoredClone[index] =
+            bidNumber !== 1 && bidNumber <= this.state.tricksWon
+              ? scoringTable.hearts[bidNumber - 6]
+              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
+              ? 250
+              : bidNumber === 1 && this.state.tricksWon === 10
+              ? scoringTable.hearts[bidNumber + 3]
+              : bidNumber === 1 && this.state.tricksWon !== 10
+              ? -1 * scoringTable.hearts[bidNumber + 3]
+              : -1 * scoringTable.hearts[bidNumber - 6];
+      }
+    }
   };
 
   handleKeepScore = () => {
