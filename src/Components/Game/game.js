@@ -28,6 +28,7 @@ export default class Game extends React.Component {
       tricksNumber: this.state.tricksNumber,
       biddingPlayer: this.state.biddingPlayer
     });
+    this.handleKeepScore();
     this.setState({
       bids: bidsClone,
       handNumber: this.state.handNumber + 1,
@@ -36,6 +37,18 @@ export default class Game extends React.Component {
       tricksNumber: 6
     });
     console.log(this.state.gameInfo);
+  };
+
+  handleBuildScore = () => {
+    const tricksWon = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    this.state.round[this.state.round.length - 1].map((team, index) => {
+      return (
+        <div className={styles.teamScore} key={`team ${index + 1}`}>
+          <span>{this.state.pointsScored}</span>
+          <Select>{tricksWon.map(tricks => {})}</Select>
+        </div>
+      );
+    });
   };
 
   handleKeepScore = () => {
@@ -160,23 +173,10 @@ export default class Game extends React.Component {
         }
       }
     }
-
-    if (config[0].find(player => player === this.state.biddingPlayer)) {
-      team1.push(
-        [
-          this.state.tricksNumber,
-          this.state.suit === "Spades"
-            ? "♠️"
-            : this.state.suit === "Clubs"
-            ? "♣️"
-            : this.state.suit === "Diamonds"
-            ? "♦"
-            : "♥︎"
-        ],
-        this.state.currentScore.team1
-      );
-      team2.push(this.state.currentScore.team2);
-    }
+    score.push(team1, team2, team3);
+    const roundClone = round.slice();
+    roundClone.push(score);
+    this.setState({ round: roundClone });
   };
 
   buildTeams = () => {
