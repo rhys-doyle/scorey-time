@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./game.css";
 import { Button, Slider, Select, Radio, Icon } from "antd";
 import classnames from "classnames";
+import scoringTable from "../Data/scoringTable";
 
 export default class Game extends React.Component {
   state = {
