@@ -8,10 +8,17 @@ export default class Game extends React.Component {
   state = {
     gameInfo: this.props.appState.gameInfo,
     bids: [],
+    round: [],
     handNumber: 1,
     suit: "Spades",
     biddingPlayer: "",
     tricksNumber: 6
+    tricksNumber: 6,
+    currentScore: {
+      team1: 0,
+      team2: 0,
+      team3: 0
+    }
   };
 
   handleConfirmBid = () => {
