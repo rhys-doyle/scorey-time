@@ -12,7 +12,6 @@ export default class Game extends React.Component {
     handNumber: 1,
     suit: "Spades",
     biddingPlayer: "",
-    tricksNumber: 6
     tricksNumber: 6,
     currentScore: {
       team1: 0,
@@ -37,6 +36,147 @@ export default class Game extends React.Component {
       tricksNumber: 6
     });
     console.log(this.state.gameInfo);
+  };
+
+  handleKeepScore = () => {
+    const suits = ["Spades", "Clubs", "Diamonds", "Hearts", "No Trumps"];
+    const config = this.state.gameInfo[this.state.gameInfo.length - 1]
+      .teamsConfig;
+    const round = this.state.round;
+    let score = [];
+    let team1 = [];
+    let team2 = [];
+    let team3 = [];
+
+    for (let i = 0; i < config.length; i++) {
+      if (config[i].find(player => player === this.state.biddingPlayer)) {
+        switch (i) {
+          case 0:
+            team1.push(
+              this.state.tricksNumber
+                .toString()
+                .concat(
+                  " ",
+                  this.state.suit === "Spades"
+                    ? "♠️"
+                    : this.state.suit === "Clubs"
+                    ? "♣️"
+                    : this.state.suit === "Diamonds"
+                    ? "♦"
+                    : "♥︎"
+                ),
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+            );
+            team2.push(
+              "DEF",
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i + 1][1] +
+                    round[round.length - 1][i + 1][2]
+            );
+            if (
+              this.state.gameInfo[this.state.gameInfo.length - 1].teams === 3
+            ) {
+              team3.push(
+                "DEF",
+                this.state.handNumber === 1
+                  ? 0
+                  : round[round.length - 1][i + 2][1] +
+                      round[round.length - 1][i + 2][2]
+              );
+            }
+            break;
+          case 1:
+            team1.push(
+              "DEF",
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i - 1][1] +
+                    round[round.length - 1][i - 1][2]
+            );
+            team2.push(
+              this.state.tricksNumber
+                .toString()
+                .concat(
+                  " ",
+                  this.state.suit === "Spades"
+                    ? "♠️"
+                    : this.state.suit === "Clubs"
+                    ? "♣️"
+                    : this.state.suit === "Diamonds"
+                    ? "♦"
+                    : "♥︎"
+                ),
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+            );
+            if (
+              this.state.gameInfo[this.state.gameInfo.length - 1].teams === 3
+            ) {
+              team3.push(
+                "DEF",
+                this.state.handNumber === 1
+                  ? 0
+                  : round[round.length - 1][i + 1][1] +
+                      round[round.length - 1][i + 1][2]
+              );
+            }
+            break;
+          case 2:
+            team1.push(
+              "DEF",
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i - 2][1] +
+                    round[round.length - 1][i - 2][2]
+            );
+            team2.push(
+              "DEF",
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i - 1][1] +
+                    round[round.length - 1][i - 1][2]
+            );
+            team3.push(
+              this.state.tricksNumber
+                .toString()
+                .concat(
+                  " ",
+                  this.state.suit === "Spades"
+                    ? "♠️"
+                    : this.state.suit === "Clubs"
+                    ? "♣️"
+                    : this.state.suit === "Diamonds"
+                    ? "♦"
+                    : "♥︎"
+                ),
+              this.state.handNumber === 1
+                ? 0
+                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+            );
+        }
+      }
+    }
+
+    if (config[0].find(player => player === this.state.biddingPlayer)) {
+      team1.push(
+        [
+          this.state.tricksNumber,
+          this.state.suit === "Spades"
+            ? "♠️"
+            : this.state.suit === "Clubs"
+            ? "♣️"
+            : this.state.suit === "Diamonds"
+            ? "♦"
+            : "♥︎"
+        ],
+        this.state.currentScore.team1
+      );
+      team2.push(this.state.currentScore.team2);
+    }
   };
 
   buildTeams = () => {
