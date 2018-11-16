@@ -46,19 +46,21 @@ export default class Game extends React.Component {
         }
 
         return (
-          <div className={styles.teamScore} key={`team ${index + 1}`}>
+          <div className={styles.teamScore} key={`team ${i + 1}`}>
+            <span className={styles.bid}>{team[0]}</span>
+            <span className={styles.currentScore}>{team[1]}</span>
             <span>{this.handlePointsScored(team, i)}</span>
             <Select
               className={styles.tricksSelect}
-              value={this.state.tricksWon[index]}
+              value={this.state.tricksWon[i]}
               onChange={value => {
                 let tricksWonClone = this.state.tricksWon.slice();
-                tricksWonClone[index] = value;
+                tricksWonClone[i] = value;
                 this.setState({ tricksWon: tricksWonClone });
               }}
             >
-              {totalTricks.map((tricks, index) => {
-                <Select.Option value={tricks} key={`${index}-${tricks}`}>
+              {totalTricks.map((tricks, count) => {
+                <Select.Option value={tricks} key={`${count}-${tricks}`}>
                   {`0${tricks}`}
                 </Select.Option>;
               })}
@@ -114,7 +116,7 @@ export default class Game extends React.Component {
       }
       return pointsScoredClone[index];
     } else {
-      return "";
+      return "N/A";
     }
   };
 
@@ -240,7 +242,11 @@ export default class Game extends React.Component {
         }
       }
     }
-    score.push(team1, team2, team3);
+    if (!team3.length) {
+      score.push(team1, team2);
+    } else {
+      score.push(team1, team2, team3);
+    }
     let roundClone = round.slice();
     roundClone.push(score);
     return roundClone;
