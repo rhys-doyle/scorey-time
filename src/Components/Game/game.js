@@ -25,8 +25,9 @@ export default class Game extends React.Component {
       tricksNumber: this.state.tricksNumber,
       biddingPlayer: this.state.biddingPlayer
     });
-    this.handleKeepScore();
+
     this.setState({
+      round: this.handleKeepScore(),
       bids: bidsClone,
       handNumber: this.state.handNumber + 1,
       suit: "Spades",
@@ -38,90 +39,82 @@ export default class Game extends React.Component {
 
   handleBuildScore = () => {
     const totalTricks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    this.state.round[this.state.round.length - 1].map((team, index) => {
-      return (
-        <div className={styles.teamScore} key={`team ${index + 1}`}>
-          <span>hello</span>
-          <Select
-            className={styles.tricksSelect}
-            value={this.state.tricksWon[index]}
-            onChange={value => {
-              let tricksWonClone = this.state.tricksWon.slice();
-              tricksWonClone[index] = value;
-              this.setState({ tricksWon: tricksWonClone });
-            }}
-          >
-            {totalTricks.map((tricks, index) => {
-              <Select.Option
-                value={tricks === 10 ? tricks : `0${tricks}`}
-                key={`${index}-${tricks}`}
-              >
-                {tricks}
-              </Select.Option>;
-            })}
-          </Select>
-        </div>
-      );
+    return this.state.round.map((round, index) => {
+      return round.map((team, i) => {
+        if (team.length === 0) {
+          return null;
+        }
+
+        return (
+          <div className={styles.teamScore} key={`team ${index + 1}`}>
+            <span>{this.handlePointsScored(team, i)}</span>
+            <Select
+              className={styles.tricksSelect}
+              value={this.state.tricksWon[index]}
+              onChange={value => {
+                let tricksWonClone = this.state.tricksWon.slice();
+                tricksWonClone[index] = value;
+                this.setState({ tricksWon: tricksWonClone });
+              }}
+            >
+              {totalTricks.map((tricks, index) => {
+                <Select.Option value={tricks} key={`${index}-${tricks}`}>
+                  {`0${tricks}`}
+                </Select.Option>;
+              })}
+            </Select>
+          </div>
+        );
+      });
     });
   };
 
-  handlePointsScored = index => {
-    let roundClone = this.state.round.slice();
-    const bid = roundClone[roundClone.length - 1][index][0];
+  handlePointsScored = (team, index) => {
+    const bid = team[0];
     let pointsScoredClone = this.state.pointsScored.slice();
-    const bidNumber = parseInt(bid.charAt(0), 10);
-    if (bid === "DEF") {
-      pointsScoredClone[index] = this.state.tricksWon[index] * 10;
-    } else {
-      switch (bid.length === 2 ? bid.charAt(1) : bid.charAt(2)) {
-        case "♠︎":
-          pointsScoredClone[index] =
-            bidNumber !== 1 && bidNumber <= this.state.tricksWon
-              ? scoringTable.spades[bidNumber - 6]
-              : bidNumber !== 1 && bidNumber <= 8 && this.state.tricksWon === 10
-              ? 250
-              : bidNumber === 1 && this.state.tricksWon === 10
-              ? scoringTable.spades[bidNumber + 3]
-              : bidNumber === 1 && this.state.tricksWon !== 10
-              ? -1 * scoringTable.spades[bidNumber + 3]
-              : -1 * scoringTable.spades[bidNumber - 6];
-          break;
-        case "♣︎":
-          pointsScoredClone[index] =
-            bidNumber !== 1 && bidNumber <= this.state.tricksWon
-              ? scoringTable.clubs[bidNumber - 6]
-              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
-              ? 250
-              : bidNumber === 1 && this.state.tricksWon === 10
-              ? scoringTable.clubs[bidNumber + 3]
-              : bidNumber === 1 && this.state.tricksWon !== 10
-              ? -1 * scoringTable.clubs[bidNumber + 3]
-              : -1 * scoringTable.clubs[bidNumber - 6];
-          break;
-        case "♦︎":
-          pointsScoredClone[index] =
-            bidNumber !== 1 && bidNumber <= this.state.tricksWon
-              ? scoringTable.diamonds[bidNumber - 6]
-              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
-              ? 250
-              : bidNumber === 1 && this.state.tricksWon === 10
-              ? scoringTable.diamonds[bidNumber + 3]
-              : bidNumber === 1 && this.state.tricksWon !== 10
-              ? -1 * scoringTable.diamonds[bidNumber + 3]
-              : -1 * scoringTable.diamonds[bidNumber - 6];
-          break;
-        case "♥︎":
-          pointsScoredClone[index] =
-            bidNumber !== 1 && bidNumber <= this.state.tricksWon
-              ? scoringTable.hearts[bidNumber - 6]
-              : bidNumber !== 1 && bidNumber <= 7 && this.state.tricksWon === 10
-              ? 250
-              : bidNumber === 1 && this.state.tricksWon === 10
-              ? scoringTable.hearts[bidNumber + 3]
-              : bidNumber === 1 && this.state.tricksWon !== 10
-              ? -1 * scoringTable.hearts[bidNumber + 3]
-              : -1 * scoringTable.hearts[bidNumber - 6];
+    const bidNumber = parseInt(bid.slice(0, bid.length - 2), 10);
+    const tricksWon = this.state.tricksWon[index];
+    if (tricksWon !== "") {
+      if (bid === "DEF") {
+        pointsScoredClone[index] = tricksWon ? tricksWon * 10 : tricksWon;
+      } else {
+        switch (bid.length === 2 ? bid.charAt(1) : bid.charAt(2)) {
+          case "♠︎":
+            pointsScoredClone[index] =
+              tricksWon === 10 && bidNumber < 9
+                ? 250
+                : tricksWon >= bidNumber
+                ? scoringTable.spades[bidNumber - 6]
+                : -1 * scoringTable.spades[bidNumber - 6];
+            break;
+          case "♣︎":
+            pointsScoredClone[index] =
+              tricksWon === 10 && bidNumber < 8
+                ? 250
+                : tricksWon >= bidNumber
+                ? scoringTable.clubs[bidNumber - 6]
+                : -1 * scoringTable.clubs[bidNumber - 6];
+            break;
+          case "♦︎":
+            pointsScoredClone[index] =
+              tricksWon === 10 && bidNumber < 8
+                ? 250
+                : tricksWon >= bidNumber
+                ? scoringTable.diamonds[bidNumber - 6]
+                : -1 * scoringTable.diamonds[bidNumber - 6];
+            break;
+          case "♥︎":
+            pointsScoredClone[index] =
+              tricksWon === 10 && bidNumber < 8
+                ? 250
+                : tricksWon >= bidNumber
+                ? scoringTable.hearts[bidNumber - 6]
+                : -1 * scoringTable.hearts[bidNumber - 6];
+        }
       }
+      return pointsScoredClone[index];
+    } else {
+      return "";
     }
   };
 
@@ -250,7 +243,7 @@ export default class Game extends React.Component {
     score.push(team1, team2, team3);
     let roundClone = round.slice();
     roundClone.push(score);
-    this.setState({ round: roundClone });
+    return roundClone;
   };
 
   buildTeams = () => {
@@ -411,6 +404,7 @@ export default class Game extends React.Component {
             <div className={styles.borderBox} />
           </div>
           <div className={styles.scoreTeams}>{this.buildTeams()}</div>
+          {this.handleBuildScore()}
         </div>
       </div>
     );
