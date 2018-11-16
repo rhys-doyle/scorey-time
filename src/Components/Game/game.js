@@ -38,33 +38,62 @@ export default class Game extends React.Component {
   };
 
   handleBuildScore = () => {
+    const currentGame = this.state.gameInfo[this.state.gameInfo.length - 1];
     const totalTricks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return this.state.round.map((round, index) => {
       return round.map((team, i) => {
         if (team.length === 0) {
           return null;
         }
-
         return (
           <div className={styles.teamScore} key={`team ${i + 1}`}>
-            <span className={styles.bid}>{team[0]}</span>
-            <span className={styles.currentScore}>{team[1]}</span>
-            <span>{this.handlePointsScored(team, i)}</span>
-            <Select
-              className={styles.tricksSelect}
-              value={this.state.tricksWon[i]}
-              onChange={value => {
-                let tricksWonClone = this.state.tricksWon.slice();
-                tricksWonClone[i] = value;
-                this.setState({ tricksWon: tricksWonClone });
-              }}
-            >
-              {totalTricks.map((tricks, count) => {
-                <Select.Option value={tricks} key={`${count}-${tricks}`}>
-                  {`0${tricks}`}
-                </Select.Option>;
-              })}
-            </Select>
+            <span className={styles.bidTricks}>
+              {team[0]}
+              <span>{team[1]}</span>
+              {console.log(team)}
+            </span>
+            <span className={styles.currentScore}>{team[2]}</span>
+            <span className={styles.pointsScored}>
+              {this.handlePointsScored(team, i)}
+            </span>
+            {(currentGame.teams === 2 && i === 0) ||
+            (currentGame === 3 && i < 2) ? (
+              <div className={styles.selectOrSpan}>
+                <Select
+                  className={styles.tricksSelect}
+                  value={this.state.tricksWon[i]}
+                  onChange={value => {
+                    let tricksWonClone = this.state.tricksWon.slice();
+                    let roundClone = this.state.round.slice();
+                    tricksWonClone[i] = value;
+                    roundClone[roundClone.length - 1][i][2] = value;
+                    this.setState({
+                      tricksWon: tricksWonClone,
+                      round: roundClone
+                    });
+                  }}
+                  children={totalTricks.map(tricks => (
+                    <Select.Option value={tricks} key={tricks}>
+                      {tricks < 10 ? `0${tricks}` : tricks}
+                    </Select.Option>
+                  ))}
+                />
+                <Button className={styles.submitTricks} children="OK" />
+              </div>
+            ) : (
+              <span
+                className={styles.tricksWonSpan}
+                children={
+                  currentGame === 2
+                    ? 10 - this.state.tricksWon[i - 1]
+                    : currentGame === 3
+                    ? 10 -
+                      this.state.tricksWon[i - 1] -
+                      this.state.tricksWon[i - 2]
+                    : ""
+                }
+              />
+            )}
           </div>
         );
       });
@@ -72,15 +101,14 @@ export default class Game extends React.Component {
   };
 
   handlePointsScored = (team, index) => {
-    const bid = team[0];
+    const bidNumber = team[0];
     let pointsScoredClone = this.state.pointsScored.slice();
-    const bidNumber = parseInt(bid.slice(0, bid.length - 2), 10);
     const tricksWon = this.state.tricksWon[index];
     if (tricksWon !== "") {
-      if (bid === "DEF") {
+      if (bidNumber === "DEF") {
         pointsScoredClone[index] = tricksWon ? tricksWon * 10 : tricksWon;
       } else {
-        switch (bid.length === 2 ? bid.charAt(1) : bid.charAt(2)) {
+        switch (team[1]) {
           case "♠︎":
             pointsScoredClone[index] =
               tricksWon === 10 && bidNumber < 9
@@ -135,109 +163,103 @@ export default class Game extends React.Component {
         switch (i) {
           case 0:
             team1.push(
-              this.state.tricksNumber
-                .toString()
-                .concat(
-                  " ",
-                  this.state.suit === "Spades"
-                    ? "♠️"
-                    : this.state.suit === "Clubs"
-                    ? "♣️"
-                    : this.state.suit === "Diamonds"
-                    ? "♦"
-                    : "♥︎"
-                ),
+              this.state.tricksNumber,
+              this.state.suit === "Spades"
+                ? "♠️"
+                : this.state.suit === "Clubs"
+                ? "♣️"
+                : this.state.suit === "Diamonds"
+                ? "♦"
+                : "♥︎",
               this.state.handNumber === 1
                 ? 0
-                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+                : round[round.length - 1][i][1] + round[round.length - 1][i][3]
             );
             team2.push(
               "DEF",
+              "",
               this.state.handNumber === 1
                 ? 0
                 : round[round.length - 1][i + 1][1] +
-                    round[round.length - 1][i + 1][2]
+                    round[round.length - 1][i + 1][3]
             );
             if (
               this.state.gameInfo[this.state.gameInfo.length - 1].teams === 3
             ) {
               team3.push(
                 "DEF",
+                "",
                 this.state.handNumber === 1
                   ? 0
                   : round[round.length - 1][i + 2][1] +
-                      round[round.length - 1][i + 2][2]
+                      round[round.length - 1][i + 2][3]
               );
             }
             break;
           case 1:
             team1.push(
               "DEF",
+              "",
               this.state.handNumber === 1
                 ? 0
                 : round[round.length - 1][i - 1][1] +
-                    round[round.length - 1][i - 1][2]
+                    round[round.length - 1][i - 1][3]
             );
             team2.push(
-              this.state.tricksNumber
-                .toString()
-                .concat(
-                  " ",
-                  this.state.suit === "Spades"
-                    ? "♠️"
-                    : this.state.suit === "Clubs"
-                    ? "♣️"
-                    : this.state.suit === "Diamonds"
-                    ? "♦"
-                    : "♥︎"
-                ),
+              this.state.tricksNumber,
+              this.state.suit === "Spades"
+                ? "♠️"
+                : this.state.suit === "Clubs"
+                ? "♣️"
+                : this.state.suit === "Diamonds"
+                ? "♦"
+                : "♥︎",
               this.state.handNumber === 1
                 ? 0
-                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+                : round[round.length - 1][i][1] + round[round.length - 1][i][3]
             );
             if (
               this.state.gameInfo[this.state.gameInfo.length - 1].teams === 3
             ) {
               team3.push(
                 "DEF",
+                "",
                 this.state.handNumber === 1
                   ? 0
                   : round[round.length - 1][i + 1][1] +
-                      round[round.length - 1][i + 1][2]
+                      round[round.length - 1][i + 1][3]
               );
             }
             break;
           case 2:
             team1.push(
               "DEF",
+              "",
               this.state.handNumber === 1
                 ? 0
                 : round[round.length - 1][i - 2][1] +
-                    round[round.length - 1][i - 2][2]
+                    round[round.length - 1][i - 2][3]
             );
             team2.push(
               "DEF",
+              "",
               this.state.handNumber === 1
                 ? 0
                 : round[round.length - 1][i - 1][1] +
-                    round[round.length - 1][i - 1][2]
+                    round[round.length - 1][i - 1][3]
             );
             team3.push(
-              this.state.tricksNumber
-                .toString()
-                .concat(
-                  " ",
-                  this.state.suit === "Spades"
-                    ? "♠️"
-                    : this.state.suit === "Clubs"
-                    ? "♣️"
-                    : this.state.suit === "Diamonds"
-                    ? "♦"
-                    : "♥︎"
-                ),
+              this.state.tricksNumber,
+              this.state.suit === "Spades"
+                ? "♠️"
+                : this.state.suit === "Clubs"
+                ? "♣️"
+                : this.state.suit === "Diamonds"
+                ? "♦"
+                : "♥︎",
               this.state.handNumber === 1
                 ? 0
-                : round[round.length - 1][i][1] + round[round.length - 1][i][2]
+                : round[round.length - 1][i][1] + round[round.length - 1][i][3]
             );
         }
       }
@@ -410,7 +432,7 @@ export default class Game extends React.Component {
             <div className={styles.borderBox} />
           </div>
           <div className={styles.scoreTeams}>{this.buildTeams()}</div>
-          {this.handleBuildScore()}
+          <div className={styles.scoreBox}>{this.handleBuildScore()}</div>
         </div>
       </div>
     );
