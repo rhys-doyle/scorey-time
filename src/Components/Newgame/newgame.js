@@ -20,7 +20,6 @@ export default class Newgame extends React.Component {
 
   handlePlayerSelect = value => {
     let playerNamesClone = value.slice();
-    console.log(value);
     this.setState({ playerNames: playerNamesClone });
   };
 
@@ -61,14 +60,11 @@ export default class Newgame extends React.Component {
         JSON.parse(localStorage.getItem("token")).currentUser
       );
 
-      console.log(playerNamesClone);
-
       let teamSelect = this.state.teamSelect;
 
       if (!teamSelect || this.state.teams === "random") {
         teamSelect = this.handleRandomTeam();
       }
-      console.log(teamSelect, "handler");
       let teamsConfig = [];
 
       if (teamSelect.length === 17) {
@@ -117,7 +113,6 @@ export default class Newgame extends React.Component {
         teamsConfig: teamsConfig,
         gameStart: new Date()
       });
-      console.log(cloneGameInfo);
       this.setState({ gameInfo: cloneGameInfo }, () => {
         this.props.gameInfoState(this.state.gameInfo);
         this.props.history.push(`/game/${id}`);
