@@ -57,7 +57,7 @@ export default class Game extends React.Component {
               {this.handlePointsScored(team, i)}
             </span>
             {(currentGame.teams === 2 && i === 0) ||
-            (currentGame === 3 && i < 2) ? (
+            (currentGame.teams === 3 && i < 2) ? (
               <div className={styles.selectOrSpan}>
                 <Select
                   className={styles.tricksSelect}
@@ -84,9 +84,9 @@ export default class Game extends React.Component {
               <span
                 className={styles.tricksWonSpan}
                 children={
-                  currentGame === 2
+                  currentGame.teams === 2
                     ? 10 - this.state.tricksWon[i - 1]
-                    : currentGame === 3
+                    : currentGame.teams === 3 && this.state.tricksWon[i - 1]
                     ? 10 -
                       this.state.tricksWon[i - 1] -
                       this.state.tricksWon[i - 2]
